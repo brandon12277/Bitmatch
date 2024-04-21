@@ -1,0 +1,54 @@
+
+
+.login-bck{
+    box-shadow: #272727 0px 0px 1px;
+}
+
+.logw-80{
+    width:70vh;
+    border-radius: 0.45em;
+}
+
+.logw-60{
+    width:50vh;
+    border-radius: 0.45em;
+}
+
+.text-grey{
+    font-size: 150%;
+    color:rgb(65, 65, 65);
+}
+
+.log-form{
+    margin-top: 20%;
+}
+
+.log-input{
+      padding:3%;
+      width:100%;
+      box-shadow: #998465 0px 0px 1px;
+      border-radius: 0.35em;
+      outline: none;
+      
+
+     
+}
+
+.form{
+    margin:2% 5% 2% 5%;
+    width:90%;
+}
+
+.form label{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+}
+
+.login{
+    width:90%;
+    padding:3%;
+    background-color: #998465;
+    border-radius: 0.45em;
+    box-shadow: #c7a776 0px 0px 2px;
+    color:white;
+}
