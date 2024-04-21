@@ -37,9 +37,20 @@ const Matches = () =>{
             console.log(likes.data.likes)
             console.log(likes.data.matched)
 
-            const matchObj = Object.values(likes.data.matched).map((item)=>{
+            const matchObj =await Promise.all( Object.values(likes.data.matched).map( async (item)=>{
                 
-                if(item)
+                if(item){
+
+                    let data = {
+                        "person1":id,
+                        "person2":item._id
+                    }
+
+                    const text = await axios.post("/auth/routes/chat/getLastMsg",data)
+                    let textVal=""
+                    if(!text.data || text.data==="")textVal="Start Chat with "+item.name
+                    else
+                    textVal =text.data
                 return(
                 <div>
                     <div onClick={()=>{myFunc(item._id)}} class="cursor" className="chat-block flex gap-5" >
@@ -47,7 +58,7 @@ const Matches = () =>{
                         <div className="">
                           
                            <h4>{item.name}</h4>
-                           <p className="text-gray-600 font-bold ">Start a chat with {item.name}</p>
+                           <p className="text-gray-600  ">{textVal}</p>
 
                         </div>
 
@@ -58,7 +69,8 @@ const Matches = () =>{
                   
                 </div>
                 )
-            })
+                }
+            }))
 
             setMatches(matchObj)
 

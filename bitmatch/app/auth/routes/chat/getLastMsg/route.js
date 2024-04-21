@@ -9,7 +9,7 @@ import mongoose from "mongoose"
 
 
 export async function POST(request){
-    const { person1,person2,text} =await request.json();
+    const { person1,person2} =await request.json();
     await connectDb()
     const data ={
        "person1":person1,
@@ -26,20 +26,22 @@ export async function POST(request){
         
         
 
-         await Chat.findByIdAndUpdate(
-            check1._id, 
-            { $push: { 
-                messages: {
-                    sender: person1, 
-                    receiver: person2, 
-                    text: text 
-                } 
-            }},
-            { new: true }
-          );
+        const lastMessage = await Chat.findById(check1._id);
+
+        if (lastMessage && lastMessage.messages && lastMessage.messages.length > 0) {
+            const text = lastMessage.messages[lastMessage.messages.length-1].text;
+            console.log("Text of the last message:", text);
+            return NextResponse.json(text,{status:201});
+
+          } else {
+            console.log("No messages found in the chat or messages block is empty");
+            const text = "";
+            console.log("Text of the last message:", text);
+            return NextResponse.json(text,{status:201});
+          }
 
          
-        return NextResponse.json(check1._id,{status:201});
+        
     }
     else{
 
@@ -52,18 +54,19 @@ export async function POST(request){
 
         if(check2){
 
-            await Chat.findByIdAndUpdate(
-                check2._id, 
-                { $push: { 
-                    messages: {
-                        sender: person1, 
-                        receiver: person2, 
-                        text: text 
-                    } 
-                }},
-                { new: true }
-              );
-            return NextResponse.json(check2._id,{status:201});
+            const lastMessage = await Chat.findById(check2._id);
+
+            if (lastMessage && lastMessage.messages && lastMessage.messages.length > 0) {
+                const text = lastMessage.messages[lastMessage.messages.length-1].text;
+                console.log("Text of the last message:", text);
+                return NextResponse.json(text,{status:201});
+    
+              } else {
+                console.log("No messages found in the chat or messages block is empty");
+                const text = "";
+                console.log("Text of the last message:", text);
+                return NextResponse.json(text,{status:201});
+              }
         }
         else
         return NextResponse.json(false,{status:201});
