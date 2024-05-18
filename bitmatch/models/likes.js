@@ -8,10 +8,11 @@ const LikeSchema = new Schema({
     liked : {
         type: String,
         required  : [true]
-    }
+    },
+    like : Boolean
 });
 
-
+mongoose.deleteModel("Likes")
 
 const Likes = mongoose.models.Likes  || mongoose.model('Likes',LikeSchema)
 

@@ -135,14 +135,14 @@ const Login = () =>{
                              
                               <div className="form">
                                  
-                                 <label className="font-bold flex items-center gap-2"> <img style={{width:"20px",height:"auto"}} src="/images/email.png"></img> Email Address</label>
+                                 <label className="font-bold flex items-center gap-2 p-2"> <img style={{width:"20px",height:"auto"}} src="/images/email.png"></img> Email Address</label>
                                  <input onChange={handleChange} type="text" name="email" placeholder="Email" class="w-full log-input"></input>
 
                               </div>
 
                               <div className="form">
                                  
-                                 <label className="font-bold flex items-center gap-2"> <img style={{width:"20px",height:"auto"}} src="/images/pass.png"></img> Password</label>
+                                 <label className="font-bold flex  gap-2 p-2"> <img style={{width:"20px",height:"auto"}} src="/images/pass.png"></img> Password</label>
                                  <input onChange={handleChange} type="password" name="password" placeholder="Password" class="w-full log-input"></input>
 
                               </div>

@@ -52,10 +52,10 @@ const Matches = () =>{
                     else
                     textVal =text.data
                 return(
-                <div>
-                    <div onClick={()=>{myFunc(item._id)}} class="cursor" className="chat-block flex gap-5" >
+                    
+                    <button onClick={()=>{myFunc(item._id)}} class="cursor" className="chat-block flex gap-5" >
                     <img className="round-img" src={item.userDetails.img[0]}></img>
-                        <div className="">
+                        <div className="text-left">
                           
                            <h4>{item.name}</h4>
                            <p className="text-gray-600  ">{textVal}</p>
@@ -65,9 +65,9 @@ const Matches = () =>{
                        
                         
 
-                    </div>
+                    </button>
                   
-                </div>
+               
                 )
                 }
             }))
@@ -130,7 +130,7 @@ const Matches = () =>{
 
             <h3 className=" w-full chat-block text-black-700  text-lg capitalize">Matches Stack ({ matches?matches.length:0 }) </h3>
             <br></br>
-            <div className=" overflow-y-scroll h-90 flex flex-col gap-5">
+            <div className=" overflow-y-scroll h-90 flex flex-col gap-5 p-2">
                  {matches}
             </div>
 

@@ -11,6 +11,7 @@ const ImagesSelect = ({ imageData, setImageData,fileData, setFileData ,imgs}) =>
     
 
   useEffect(()=>{
+
     console.log(imgs[0])
   })
 

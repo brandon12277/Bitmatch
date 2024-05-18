@@ -87,19 +87,19 @@ const SignUp = () =>{
 
                               <div className="form">
                                  
-                                 <label className="font-bold flex items-center gap-2"> <img style={{width:"20px",height:"auto"}} src="/images/pass.png"></img> Password</label>
+                                 <label className="font-bold flex items-center gap-2 p-2"> <img style={{width:"20px",height:"auto"}} src="/images/pass.png"></img> Password</label>
                                  <input onChange={handleChange} type="password" name="password" placeholder="Password" class="w-full log-input"></input>
 
                               </div>
 
                               <div className="form">
                                  
-                                 <label className="font-bold flex items-center gap-2"> <img style={{width:"20px",height:"auto"}} src="/images/pass.png"></img>Confirm Password</label>
+                                 <label className="font-bold flex items-center gap-2 p-2"> <img style={{width:"20px",height:"auto"}} src="/images/pass.png"></img>Confirm Password</label>
                                  <input onChange={handleChange} type="password" name="confirm_password" placeholder="Password" class="w-full log-input"></input>
 
                               </div>
 
-                              <button onClick={handleForm} className="login">Register</button>
+                              <button onClick={handleForm} className="login w-70">Register</button>
 
 
                         </div>

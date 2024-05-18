@@ -8,7 +8,8 @@ import bcrypt from "bcrypt"
 export async function POST(request){
     const { email,password} =await request.json();
     try{
-
+        
+        connectDb()
         console.log(email,password)
         const finduser = {
             email  : email

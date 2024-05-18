@@ -66,6 +66,7 @@ const ProfileCreation = () =>{
     last: '',
     about:'',
     gender:'',
+    age:''
   });
   
 
@@ -131,6 +132,7 @@ const user = JSON.parse(userdata)
       "name" : formData.first+' '+formData.last,
       "about" : formData.about,
       "gender" : formData.gender,
+      "age" : formData.age,
       "buff" : buffer,
       "types" : files,
       "techData" : techData,
@@ -200,6 +202,7 @@ const user = JSON.parse(userdata)
                name = {user.name}
                about = {user.userDetails.about}
                gender = {user.userDetails.gender}
+               age = {user.userDetails.age}
             
             />
             <Tech

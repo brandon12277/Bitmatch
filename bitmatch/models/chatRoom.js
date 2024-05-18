@@ -23,6 +23,9 @@ const ChatSchema = new Schema({
         text: {
           type: String,
           required: true
+        },
+        date : {
+          type : String
         }
       }]
 

@@ -62,15 +62,16 @@ const MainUserPage = () =>{
                       }
                       
                       user_block["img"] = user.userDetails.img
+                      user_block["age"] = user.userDetails.age
                       user_block["techStack"] = user.userDetails.stack
                     if(user._id === user_d._id){
                       localStorage.setItem("user",JSON.stringify(user))
                       
                     }
-                    if(user._id != user_d._id && !liked.includes(user._id)){
+                    if( user._id !=user_d._id  && !liked.includes(user._id)){
                      const swipe = (
                       
-                        <div className={`${classN} absolute top-50 left-50 user1`}>
+                        <div className={`${classN} flex flex-col absolute justify-center items-center user1`}>
                            <ProfileCard
                           like={()=>{like(classN,user._id)}}
                           dislike={()=>{dislike(classN,user._id)}}
@@ -92,16 +93,16 @@ const MainUserPage = () =>{
               })
               const endPage = (
              
-                <div className={`absolute top-50 left-50`}>
+                <div className={`flex justify-center items-center `}>
                
-                <div className="mt-7 relative overflow-y-auto card-90  max-w-md bg-white shadow-top  rounded-lg overflow-hidden">
-                       <div className=" w-full flex flex-col justify-center items-center">
+                <div className="  flex justify-center items-center relative overflow-y-auto card-90  max-w-md  shadow-top  rounded-lg overflow-hidden">
+                       <div className=" flex flex-col justify-center items-center">
                           <img  style={{width:"300px",height:"auto"}} src="/images/end2.png"></img>
                          <p className="end-page">No more matches available</p>
 
                        </div>
                 </div>
-                <div className=" bg-white bitcard-nav px-4 py-2 flex justify-between items-center">
+                <div className=" bg-white bitcard-nav px-4 py-2 flex justify-center items-center">
         <button style={{visibility:"hidden"}} className="color-main  text-white font-bold py-2 px-4 rounded ">
              &#9829;
         </button>
@@ -133,8 +134,8 @@ const MainUserPage = () =>{
         console.log(idx,id)
 
         const card = document.querySelector('.'+idx);
-        card.style.transition = 'transform 0.6s ease-in-out'
-        card.style.transform = 'translateX(200vh)';
+        card.style.transition = 'transform 0.8s ease-in-out'
+        card.style.transform = 'translateX(200vh) rotate(45deg)';
 
         const data = {
             "liked":id,
@@ -151,8 +152,8 @@ const MainUserPage = () =>{
       function dislike(idx,id) {
         console.log(idx)
         const card = document.querySelector('.'+idx);
-        card.style.transition = 'transform 0.6s ease-in-out'
-        card.style.transform = 'translateX(-200vh)';
+        card.style.transition = 'transform 0.8s ease-in-out'
+        card.style.transform = 'translateX(-200vh) rotate(-45deg)';
       }
 
     

@@ -53,7 +53,7 @@ return downloadURL
 
   export async function POST(req,res){
        
-      const { name,about,gender,buff,types,techData,email } = await req.json()
+      const { name,about,gender,buff,types,techData,email ,age} = await req.json()
       await connectDb()
       const imgs = []
       console.log(about)
@@ -75,7 +75,8 @@ return downloadURL
            "img" : url_imgs,
             "stack": techData,
             "gender" : gender,
-            "about":about
+            "about":about,
+            "age":age
             
      }
 

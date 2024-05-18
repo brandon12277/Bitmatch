@@ -29,11 +29,28 @@ const userSchema = new Schema({
         },
         about : {
             type:String
+        },
+        age : {
+            type:Number
         }
 
 
 
-    }
+    },
+    communities : [
+        {
+            commId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Communities', 
+                required: true
+              },
+              role:{
+                type : String
+              }
+        }
+    ]
+
+
 
 });
 

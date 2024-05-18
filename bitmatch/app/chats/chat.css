@@ -19,6 +19,7 @@
 .chat-block-send{
     padding:1%;
     border-radius: 0.45em;
+    border-top-left-radius: 0em;
     background-color: #cab99f;
     font-family: "Poppins", sans-serif;
 }
@@ -27,6 +28,7 @@
 .chat-block-add{
     padding:1%;
     border-radius: 0.45em;
+    border-top-right-radius: 0em;
     background-color: lightgreen;
     font-family: "Poppins", sans-serif;
 }

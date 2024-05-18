@@ -71,7 +71,7 @@ const Navbar = () =>{
           <div className="p-2 w-full flex flex-col justify-center items-center br-d nav-col nav-bck">
           <div className="p-2 w-full flex justify-center items-center">
           <div className="">
-          <img src="/images/bitlogowhite.png" style={{width:"150px",height:"auto"}}></img>
+          <img src="/images/bitm.png" style={{width:"150px",height:"auto"}}></img>
           </div>
           <div className="w-full flex justify-end gap-20 mr-5 ">
 
@@ -104,8 +104,8 @@ const Navbar = () =>{
         }
       </div>
         :
-        <div className={` poppins w-full flex flex-row p-3 nav-col nav-bck`}>
-        <img src="/images/bitlogowhite.png" style={{width:"140px",height:"auto"}}></img>
+        <div className={` poppins w-full flex flex-row items-center p-3 nav-col nav-bck`}>
+        <img src="/images/bitm.png" style={{width:"auto",height:"35px"}}></img>
         <div className="w-full flex  items-center justify-end gap-10 mr-10">
         <button  onClick={() => redirectToLink('/')}  className="def-but pt-1 pr-4 pb-1 pl-4 text-white">About</button>
             <button  onClick={() => redirectToLink('/')}  className="def-but pt-1 pr-4 pb-1 pl-4 text-white">Contact</button>

@@ -28,7 +28,7 @@ const Chat_Room = () =>{
     });
 
 
-    const addChat = (msg)=>{
+    const addChat = (msg,time)=>{
 
         const now = new Date();
        
@@ -36,7 +36,7 @@ const Chat_Room = () =>{
         const hours = now.getHours(); 
         const minutes = now.getMinutes(); 
 
-        let formattedTime = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
+       
 
           
 
@@ -51,7 +51,7 @@ const Chat_Room = () =>{
             <div class="mr-5 bg-black flex flex-col chat-block-add">
 
                       <p>${msg}</p>
-                      <p class="time-text"> ${formattedTime}</p>
+                      <p class="time-text"> ${time}</p>
 
             </div>
 
@@ -60,15 +60,11 @@ const Chat_Room = () =>{
     }
     
 
-    const sendChat = (msg)=>{
+    const sendChat = (msg,time)=>{
 
-        const now = new Date();
-      
+       
 
-        const hours = now.getHours(); 
-        const minutes = now.getMinutes(); 
-
-        let formattedTime = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
+       
         
         // let data = {
         //     "sender":
@@ -83,7 +79,7 @@ const Chat_Room = () =>{
             <div class="ml-5 bg-black flex flex-col chat-block-send">
 
                       <p>${msg}</p>
-                      <p class="time-text"> ${formattedTime}</p>
+                      <p class="time-text"> ${time}</p>
 
             </div>
 
@@ -138,9 +134,9 @@ const Chat_Room = () =>{
                 console.log(user)
                 msgs.map((msg_block)=>{
                     if(msg_block.sender === user_d._id)
-                      chat_block.innerHTML+=addChat(msg_block.text)
+                      chat_block.innerHTML+=addChat(msg_block.text,msg_block.date)
                     else
-                      chat_block.innerHTML+=sendChat(msg_block.text)
+                      chat_block.innerHTML+=sendChat(msg_block.text,msg_block.date)
                 }) 
                 setRoom(check_room_exist.data._id)
                 
@@ -173,12 +169,18 @@ const Chat_Room = () =>{
         socket.on('sendMsg',({message,userid}) =>{
             const user_d = JSON.parse(localStorage.getItem("user"))
     
-    
+              
                
             if(userid !== user_d._id)
             {
+                const now = new Date();
+      
+
+                const hours = now.getHours(); 
+                const minutes = now.getMinutes(); 
                let chat = document.getElementById("chat-block")
-               chat.innerHTML+=sendChat(message)
+               let formattedTime = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
+               chat.innerHTML+=sendChat(message,formattedTime)
             }
          })
         
@@ -203,19 +205,25 @@ const Chat_Room = () =>{
      const sendMessage = async (e) =>{
 
         console.log(usermsg)
+        const now = new Date();
+      
 
+        const hours = now.getHours(); 
+        const minutes = now.getMinutes(); 
+        let formattedTime = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
         let data = {
             "person1":user._id,
             "person2":reciever._id,
-            "text":usermsg.value
+            "text":usermsg.value,
+            "date":formattedTime
            }
 
            console.log(data)
-
+           
            const text = await axios.post("/auth/routes/chat/addChat",data)
        
         let chat = document.getElementById("chat-block")
-        chat.innerHTML+=addChat(usermsg.value)
+        chat.innerHTML+=addChat(usermsg.value,formattedTime)
          
         socket.emit('recieveMsg', { room: roomId, message: usermsg.value , userid:user._id }); 
          

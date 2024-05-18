@@ -25,13 +25,13 @@ const DefaultPage = () =>{
    
 
     return(
-        <>
+        <div className="overflow-hidden h-100">
            
         <Navbar/>
 
-         <div className ="w-full h-100 flex flex-col">
+         <div className ="w-full  flex flex-col">
             
-            <div className="w-full flex justify-center items-center h-100  bck-main">
+            <div className="w-full flex h-100 justify-center items-center  bck-main">
                 <div className={` w-full flex flex-col justify-center items-center intro-page text-center  gap-10`}>
                     <div>
 
@@ -68,11 +68,11 @@ const DefaultPage = () =>{
         
              
          </div>
-         <About/>
+        
 
         
     
-    </>
+    </div>
     )
 
 
