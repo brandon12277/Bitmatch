@@ -5,9 +5,16 @@
     box-shadow: #1c1c1c 0px 0px 2px;
 }
 
-.chat-bar{
+#msg{
     padding:1%;
-    border-radius: 0.55em;
+    border:none;
+    outline:none;
+}
+
+.chat-bar{
+   
+    
+    border-radius: 2em;
     font-family: "Roboto", sans-serif;
     outline:none;
     border:none;

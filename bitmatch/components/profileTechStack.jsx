@@ -42,13 +42,26 @@ const Tech = ({ techData, setTechData,tech}) =>{
    };
    
     
+   const stackImg = [(<i class="fa-brands fa-react"></i>),
+   (<i class="fa-brands fa-vuejs"></i>),
+   (<i class="fa-brands fa-angular"></i>),
+   (<i class="fa-solid fa-leaf"></i>),
+   (<i class="fa-brands fa-node"></i>),
+   (<i class="fa-brands fa-hackerrank"></i>),
+   (<i class="fa-brands fa-adn"></i>),
+   (<i class="fa-brands fa-java"></i>),
+   (<i class="fa-brands fa-python"></i>),
+   (<i class="fa-brands fa-js"></i>),
+   (<i class="fa-solid fa-n"></i>),
+  
+  ]
 
-    const stack = ['ReactJs','Vue','Angular','MongoDB','Nodejs','MERN','MEAN','Cyber Security','ASP.NET','JAVA','PYTHON','JAVASCRIPT','NextJS','TypeScript']
+    const stack = ['ReactJs','Vue','Angular','MongoDB','Nodejs','Cyber Security','ASP.NET','JAVA','PYTHON','JAVASCRIPT','NextJS']
     
 
     return(
       <>
-       <h2 className='mt-20 text-large card-txt text-black-900 font-bold text-lg capitalize'>Select your tech stack</h2>
+       <h2 className='mt-20 text-large card-txt text-black-900 font-bold text-lg capitalize mb-2'>Select your tech stack</h2>
           <p className="text-grey-800 text-sm"> Choose the top 5 tech to highlight your skills </p>
     <div className="w-90 flex flex-col justify-center gap-10 roboto">
           
@@ -57,16 +70,17 @@ const Tech = ({ techData, setTechData,tech}) =>{
             
                {
                 stack.map((item,ind)=>(
-                    <label className="inline-flex items-center mr-4">
+                    <label className="inline-flex gap-5 items-center mr-4 cursor-pointer">
+                       <span style={{color:"#393124",fontSize:"large"}} className="ml-2">{stackImg[ind]}</span>
                     <input
-                      type="checkbox"
+                      type="button"
                       name={item}
                       value={item}
                       checked={isChecked(item)}
                       onChange={handleChange}
                       className="form-radio"
                     />
-                    <span className="ml-2">{item}</span>
+                   
                   </label>
                 ))
                }

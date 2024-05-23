@@ -93,23 +93,16 @@ const MainUserPage = () =>{
               })
               const endPage = (
              
-                <div className={`flex justify-center items-center `}>
+                <div className={` flex flex-col justify-center items-center `}>
                
                 <div className="  flex justify-center items-center relative overflow-y-auto card-90  max-w-md  shadow-top  rounded-lg overflow-hidden">
-                       <div className=" flex flex-col justify-center items-center">
+                       <div className="text-center flex flex-col justify-center items-center">
                           <img  style={{width:"300px",height:"auto"}} src="/images/end2.png"></img>
-                         <p className="end-page">No more matches available</p>
+                         <p className="end-page">Out of swipes for today. Rest and swipe again tomorrow!</p>
 
                        </div>
                 </div>
-                <div className=" bg-white bitcard-nav px-4 py-2 flex justify-center items-center">
-        <button style={{visibility:"hidden"}} className="color-main  text-white font-bold py-2 px-4 rounded ">
-             &#9829;
-        </button>
-        <button style={{visibility:"hidden"}}  className="  text-white font-bold py-2 px-4 rounded">
-        &#x274c;
-        </button>
-    </div>
+             
                 </div>
               
               )
@@ -139,7 +132,8 @@ const MainUserPage = () =>{
 
         const data = {
             "liked":id,
-            "liked_by":user_d._id
+            "liked_by":user_d._id,
+            "like" : "true"
         }
          
         const like = await axios.post('/auth/routes/likes/addLike',data)
@@ -149,8 +143,16 @@ const MainUserPage = () =>{
         }
       }
       
-      function dislike(idx,id) {
+      async function dislike(idx,id) {
         console.log(idx)
+        const user_d = JSON.parse(localStorage.getItem("user"))
+        const data = {
+          "liked":id,
+          "liked_by":user_d._id,
+          "like" : "false"
+      }
+       
+      const dislike = await axios.post('/auth/routes/likes/addLike',data)
         const card = document.querySelector('.'+idx);
         card.style.transition = 'transform 0.8s ease-in-out'
         card.style.transform = 'translateX(-200vh) rotate(-45deg)';
@@ -167,6 +169,8 @@ return (
     userD.userProfileSet === false?
     <>
        <BottomNavbar/>
+       <div className="w-full flex justify-center items-center main-bck">
+    <div className="relative w-full flex  justify-center items-center h-100 relative top-0 uni-border ">
        <div className="mt-7 w-70  flex flex-col justify-center items-center relative overflow-y-auto card-90  max-w-md bg-white shadow-top  rounded-lg overflow-hidden">
                        <div className=" w-full flex flex-col justify-center items-center">
                           <img  style={{width:"300px",height:"auto"}} src="/images/end2.png"></img>
@@ -174,6 +178,9 @@ return (
 
                        </div>
         </div>
+    </div>
+        </div>
+  
      
     </>
     :
@@ -185,8 +192,16 @@ return (
    
     <BottomNavbar/>
   <div className="w-full flex justify-center items-center main-bck">
-    <div className="relative w-full flex justify-center items-center h-100 relative top-0 uni-border ">
-     
+    <div className="relative w-full flex  justify-center items-center h-100 relative top-0 uni-border ">
+    <div className="absolute top-0 right-0 m-4 w-full flex justify-end items-center"> 
+        <h1 className='ml-10 poppins text-lg font-bold'>BitMatch</h1>
+    <div className="w-full">
+      </div> 
+      <button className="outline-none border-none ">
+     <img style={{ width:"30px",height:"auto" }} src="/images/filter.png"></img> 
+     </button>
+
+    </div>
          {swipeComponent}
              
     </div>

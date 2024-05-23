@@ -6,14 +6,18 @@ import { NextResponse } from "next/server"
 
 export async function POST(request){
 
-    const { liked,liked_by } =await request.json();
+    const { liked,liked_by,like } =await request.json();
     try{
 
         await connectDb()
-
+        
+        let likeData = false;
+        if(like === "true")likeData = true;
+         
         const data = {
             "liked_by":liked_by,
-            "liked":liked
+            "liked":liked,
+            "like" : likeData
         }
 
         await Likes.create(data)

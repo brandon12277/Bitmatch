@@ -77,10 +77,11 @@ function ImageCropper() {
               image={image}
               crop={crop}
               zoom={zoom}
-              aspect={1}
+              aspect={4/3}
               onCropChange={setCrop}
               onZoomChange={setZoom}
               onCropComplete={onCropComplete}
+              cropperProps={{ cropSize: { height: 400 } }}
             />
           </div>
           <button onClick={handleCropImage}>Crop Image</button>

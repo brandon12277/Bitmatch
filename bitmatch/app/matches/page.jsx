@@ -5,12 +5,17 @@ import axios from "axios"
 import {react,useState,useEffect} from "react"
 import "./match.css"
 import Loader from "@/components/loader"
+import { Poppins } from 'next/font/google'
 
 
-
-
+const poppinsthick = Poppins({
+    weight: '400',
+    subsets: ['latin'],
+  })
 
 const Matches = () =>{
+
+    
 
     const [likes,setLikes] = useState(null)
     const [matches,setMatches] = useState(null)
@@ -112,11 +117,18 @@ const Matches = () =>{
            <div className="flex justify-center items-center w-full">
             <div className="uni-border flex flex-col  items-center">
 
-           
+            <div className="absolute  top-0 right-0 m-4 w-full flex justify-end items-center"> 
+       
+      <button className="outline-none border-none mt-4 mr-4 ">
+     <img style={{ width:"30px",height:"auto" }} src="/images/filter.png"></img> 
+     </button>
+
+    </div>
 
            <div className="w-90  p-3">
-
-            <h3 className="chat-block text-black-700 text-lg capitalize">Hacker Queue ({ likes?likes.length:0 })</h3>
+               
+           
+           <h3 className={`${poppinsthick.className} card-txt text-lg  text-black-900 font-bold  capitalize `}>Hacker Queue ({ likes?likes.length:0 })</h3>
             <br></br>
             <div className="overflow-x-scroll flex gap-10">
                   {likes}
@@ -128,7 +140,7 @@ const Matches = () =>{
             
         <div className="w-90  p-3  ">
 
-            <h3 className=" w-full chat-block text-black-700  text-lg capitalize">Matches Stack ({ matches?matches.length:0 }) </h3>
+        <h2 className={`${poppinsthick.className} card-txt text-lg text-black font-bold  capitalize `}>Chat Stack ({ matches?matches.length:0 }) </h2>
             <br></br>
             <div className=" overflow-y-scroll h-90 flex flex-col gap-5 p-2">
                  {matches}

@@ -49,6 +49,10 @@ html{
     border: none;
 }
 
+.brightness-80{
+  filter: brightness(65%);
+}
+
 .land-but:hover{
     border-radius: 0.5em;
     color:white;
@@ -74,7 +78,7 @@ html{
 }
 
 .h-100{
-    height: 95vh;
+    height: 100vh;
 }
 
 .w-90{
@@ -96,9 +100,7 @@ html{
     color: #ff63af;
 }
 
-.bitcard-nav{
-    background-color: white;
-}
+
 
 .shadow-bd{
     box-shadow: #525252 0px 0px 10px;
@@ -174,6 +176,7 @@ html{
   }
 
   .text-trans{
+   
     font-size: 400%;
     font-family: "Libre Baskerville", serif;
     font-weight:800;
@@ -190,6 +193,12 @@ html{
     color:#1c1c1c;
     
 
+  }
+
+  .main-color{
+    background-color:#393124 ;
+    padding:2%;
+    font-family: "Roboto", sans-serif;
   }
 
   .text-platform{
@@ -222,8 +231,9 @@ html{
   }
 
   .w-img{
-    width:100%;
+    width:500px;
     height:400px;
+    filter: brightness(35%);
 
   }
 
@@ -259,7 +269,8 @@ html{
 }
 
 .b-input{
-  border-bottom: #998465 2px solid;
+  border: #998465 1px solid;
+  border-radius: 0.45em;
 }
 
 .end-page{

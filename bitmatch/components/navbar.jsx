@@ -105,7 +105,7 @@ const Navbar = () =>{
       </div>
         :
         <div className={` poppins w-full flex flex-row items-center p-3 nav-col nav-bck`}>
-        <img src="/images/bitm.png" style={{width:"auto",height:"35px"}}></img>
+       <h1 style={{fontFamily:'"Libre Baskerville", serif',color:"#ffe4c0"}} className="text-2xl">BitMatch</h1>
         <div className="w-full flex  items-center justify-end gap-10 mr-10">
         <button  onClick={() => redirectToLink('/')}  className="def-but pt-1 pr-4 pb-1 pl-4 text-white">About</button>
             <button  onClick={() => redirectToLink('/')}  className="def-but pt-1 pr-4 pb-1 pl-4 text-white">Contact</button>

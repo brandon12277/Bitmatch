@@ -35,7 +35,9 @@ const poppinsthick = Poppins({
 const ProfileCreation = () =>{
     
     const [page,setPage] = useState(1)
+    const [settings,setSettings] = useState(null)
     const [techData,setTechData] = useState([])
+    const [profileStrength,setStrength] = useState(0)
 
     const[user,setUser] = useState(null)
     const[auth,setAuth] = useState(null)
@@ -74,6 +76,13 @@ const ProfileCreation = () =>{
     const user_d = JSON.parse(localStorage.getItem("user"))
     console.log(user_d)
     setUser(user_d)
+    
+    let len = user_d.userDetails.img.length + user_d.userDetails.stack.length + (user_d.userDetails.about === ''?0:1) + (user_d.name === ''?0:1) 
+   console.log(len,user_d.userDetails.img.length,user_d.userDetails.stack.length)
+    setStrength(Math.floor((len/13)*100))
+    
+     
+     
   },[])
 
   function getCurrentDateTimeString() {
@@ -177,17 +186,49 @@ const user = JSON.parse(userdata)
          user?
           <>
            <BottomNavbar/>
-           <button style={{margin:"1%"}} onClick={Logout} className="get-start">Logout</button>
-           <div className="flex justify-center items-center p-4">
+           {/* <button style={{margin:"1%"}} onClick={Logout} className="get-start">Logout</button> */}
+           
+           {/* <div className="flex justify-center items-center p-4">
               <img src="/images/bitlogowhite.png" style={{width:"auto",height:"40px"}}></img>
+           </div> */}
+           
+
+           <div className="flex justify-center items-center gap-10 p-4 mb-10">
+             
+             <div className=" w-full rounded-full shadow-lg">
+               
+                <div style={{width:`${profileStrength}%`}} className="flex poppins justify-start items-center  h-10 main-color rounded-full shadow-lg">
+                        <h3  className="p-3 text-white">Profile {profileStrength}% Completed</h3>
+                </div>
+               
+
+             </div>
+             <div className="relative">
+             <button onClick={()=>{if(settings)setSettings(null); else setSettings(1)}} className="outline-none border-none ">
+                <i className=" text-4xl fa-solid fa-gear"></i>
+             </button>
+             {
+               settings?
+             <div className="z-20 flex flex-col gap-5 bg-white absolute right-0 p-10 shadow rounded">
+             
+             <button className="flex gap-2 items-center outline-none border-none w-full" onClick={()=>{}} ><i class="fa-regular fa-id-card"></i> Profile</button>
+                  <button className="flex gap-2 items-center outline-none border-none w-full" onClick={Logout}><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                  
+                    
+             </div>
+             :
+             <></>
+              }
+             </div>
+             
+            
+                
            </div>
-          
-          
             <div  className ={`${poppinsthick.className} ml-5 w-full justify-center `}>
             
 
-            <h2 className='card-txt text-large text-black-900 font-bold text-lg capitalize'>Upload Photos</h2>
-            <p className="text-grey-800 text-sm">Choose your best photos</p>
+            <h2 className='card-txt text-large text-black-900 font-bold text-lg capitalize mb-2'>Profile Photos</h2>
+            <p className="text-grey-800 text-sm">Select photos to highlight your profile in the best way possible</p>
              
             <ImagesSelect
                 imageData = {imageData} 
@@ -211,7 +252,7 @@ const user = JSON.parse(userdata)
               tech = {user.userDetails.stack}
             
             />
-          <button onClick={handleForm} className={`get-start p-3  mb-10 mt-10`}>Create Profile</button>
+          <button onClick={handleForm} className={`get-start p-3  mb-10 mt-10`}>Update Profile</button>
             </div>
             </>
             :

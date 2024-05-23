@@ -12,7 +12,7 @@ const ImagesSelect = ({ imageData, setImageData,fileData, setFileData ,imgs}) =>
 
   useEffect(()=>{
 
-    console.log(imgs[0])
+    console.log(imgs)
   })
 
    
@@ -67,18 +67,20 @@ const ImagesSelect = ({ imageData, setImageData,fileData, setFileData ,imgs}) =>
     return(
         <div  className="">
 
-            <div className="mt-10 grid grid-cols-3 gap-10 justify-center ">
+            <div className="mt-10 grid grid-cols-3 gap-4 justify-center ">
                 
 
                   {   
                      fileInputRef.map((ref,ind)=>(
-                        <div data-key={ind} onClick={handleButtonClick} className="relative w-32 h-32 rounded-[0.45em] shadow-xl flex items-center justify-center cursor-pointer" htmlFor="upload" style={{ backgroundImage: imageData[ind+1] === ''?`url(${ imgs[ind] })` : `url(${ imageData[ind+1] })` }}>
+                        <div data-key={ind} onClick={handleButtonClick} className="relative w-40 h-40 rounded-[0.45em] shadow-xl flex items-center justify-center cursor-pointer" htmlFor="upload" style={{ backgroundImage: imageData[ind+1] === ''?`url(${ imgs[ind] })` : `url(${ imageData[ind+1] })` }}>
                         <input data-key={ind}  ref={ref} style={{display:"none"}}  type="file" name="file" onChange={(e)=>{handleImageChange(e,ind)}}  id="upload" accept="image/png, image/jpg, image/jpeg"></input>
                             <div data-key={ind} id="image_button">
 
 
-
-                            <span data-key={ind} className="text-gray-400 text-4xl" onChange={handleButtonClick}>+</span>
+                            { 
+                             imageData[ind+1] === '' && imgs[ind] === undefined ?<span data-key={ind} className=" text-4xl" onChange={handleButtonClick}>+</span> :<></>
+                            }
+                           
                             </div>
                         </div>
 

@@ -13,7 +13,8 @@ export async function POST(request){
         await connectDb()
        console.log(id)
         const data = {
-            "liked": id
+            "liked": id,
+            "like" : true
         }
 
         const likes = await Likes.find(data)
@@ -38,7 +39,8 @@ export async function POST(request){
 
             let dat = {
                 "liked_by" : id,
-                "liked" : like.liked_by
+                "liked" : like.liked_by,
+                "like" : true
                
                 
                 

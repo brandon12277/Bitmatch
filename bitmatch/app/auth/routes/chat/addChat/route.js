@@ -9,7 +9,7 @@ import mongoose from "mongoose"
 
 
 export async function POST(request){
-    const { person1,person2,text} =await request.json();
+    const { person1,person2,text,date} =await request.json();
     await connectDb()
     const data ={
        "person1":person1,
@@ -32,7 +32,8 @@ export async function POST(request){
                 messages: {
                     sender: person1, 
                     receiver: person2, 
-                    text: text 
+                    text: text ,
+                    date : date
                 } 
             }},
             { new: true }
@@ -58,7 +59,8 @@ export async function POST(request){
                     messages: {
                         sender: person1, 
                         receiver: person2, 
-                        text: text 
+                        text: text ,
+                        date : date
                     } 
                 }},
                 { new: true }
