@@ -71,7 +71,7 @@ const Navbar = () =>{
           <div className="p-2 w-full flex flex-col justify-center items-center br-d nav-col nav-bck">
           <div className="p-2 w-full flex justify-center items-center">
           <div className="">
-          <img src="/images/bitm.png" style={{width:"150px",height:"auto"}}></img>
+          <img src="/images/bitm.png" style={{width:"150px",height:"auto"}}></img> 
           </div>
           <div className="w-full flex justify-end gap-20 mr-5 ">
 
@@ -91,10 +91,10 @@ const Navbar = () =>{
           {
               on ?
           <div id= "nav-mob" className="w-full flex flex-col items-center gap-20 mt-5">
-            <button  onClick={() => redirectToLink('/')}  className="def-but pt-1 pr-4 pb-1 pl-4 ">About</button>
+            <button  onClick={() => redirectToLink('/')}  className="def-but pt-1 pr-4 pb-1 pl-4 ">Home</button>
             <button  onClick={() => redirectToLink('/')}  className="def-but pt-1 pr-4 pb-1 pl-4 ">Contact</button>
               <button  onClick={() => redirectToLink('/Login')}  className="def-but pt-1 pr-4 pb-1 pl-4 ">Login</button>
-              <button onClick={() => redirectToLink('/Login')} className="get-start">Sign Up</button>
+              <button onClick={() => redirectToLink('/Login')} className="bg-yellow-500 px-8 py-4 rounded-full shadow">Sign Up</button>
 
               
           </div>
@@ -104,13 +104,18 @@ const Navbar = () =>{
         }
       </div>
         :
-        <div className={` poppins w-full flex flex-row items-center p-3 nav-col nav-bck`}>
-       <h1 style={{fontFamily:'"Libre Baskerville", serif',color:"#ffe4c0"}} className="text-2xl">BitMatch</h1>
+        <div className={` poppins w-full flex flex-row items-center justify-center p-6  nav-bck`}>
+         <div className=" ">
+          <img src="/images/bitm.png" style={{width:"200px",height:"auto"}}></img> 
+          </div>
         <div className="w-full flex  items-center justify-end gap-10 mr-10">
-        <button  onClick={() => redirectToLink('/')}  className="def-but pt-1 pr-4 pb-1 pl-4 text-white">About</button>
+          <div className="flex w-full items-center justify-center gap-10">
+          <button  onClick={() => redirectToLink('/')}  className="def-but pt-1 pr-4 pb-1 pl-4 text-white">Home</button>
             <button  onClick={() => redirectToLink('/')}  className="def-but pt-1 pr-4 pb-1 pl-4 text-white">Contact</button>
               <button  onClick={() => redirectToLink('/Login')}  className="def-but pt-1 pr-4 pb-1 pl-4 text-white ">Login</button>
-              <button onClick={() => redirectToLink('/SignUp')} className="get-start">Sign Up</button>
+          </div>
+       
+              <button onClick={() => redirectToLink('/SignUp')} className="bg-yellow-300 w-[10vh] font-[400] px-2 py-2 rounded-lg shadow">Sign Up</button>
         </div>
 
         </div>

@@ -23,6 +23,8 @@ const poppinsthick = Poppins({
   const notifySuccess = (msg) => toast.success(msg);
 
 const SignUp = () =>{
+     
+   const[on,setOn] = useState(null)
 
     const [formData, setFormData] = useState({
         name: '',
@@ -38,6 +40,7 @@ const SignUp = () =>{
       };
 
       const handleForm = async () =>{
+         setOn(1)
          try{
         const createUser = await axios.post("/auth/routes/user/createUser",formData)
 
@@ -49,6 +52,7 @@ const SignUp = () =>{
         }
          }
          catch(err){
+            setOn(null)
             console.log(err)
          }
 
@@ -58,9 +62,12 @@ const SignUp = () =>{
  
      return(
        <>
-          <Navbar/>
-         <div className="w-full flex justify-center items-center ">
-          <div className="logw-80 m-5 login-bck pt-10 pb-10 gap-10 flex justify-center items-center flex-col">
+       
+         <div className="w-full h-100 flex justify-center items-center flex-col bck-main ">
+         <div className="w-full flex items-center justify-center p-5">
+         <img src="/images/bitm.png" style={{width:"150px",height:"auto"}}></img> 
+      </div>
+          <div className="w-[65vh] m-2 rounded-lg shadow-lg bg-white px-8 py-10 gap-6 flex justify-center items-center flex-col">
 
                       <div className="flex justify-center items-center flex-col">
          
@@ -99,7 +106,21 @@ const SignUp = () =>{
 
                               </div>
 
-                              <button onClick={handleForm} className="login w-70">Register</button>
+                              {
+
+!on?
+<button onClick={handleForm} className="bg-yellow-500 px-10 py-2 rounded-full shadow">Sign Up</button>
+:
+<>
+<ClipLoader
+color={"yellow"}
+
+size={50}
+
+/>
+</>
+
+}
 
 
                         </div>

@@ -26,10 +26,18 @@ const ChatSchema = new Schema({
         },
         date : {
           type : String
+        },
+        read : {
+          type:Boolean
+        },
+        type : {
+          type: String,
+          enum: ['text', 'photo','file']
         }
       }]
 
 });
+
 
 
 

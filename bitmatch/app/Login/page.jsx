@@ -2,6 +2,7 @@
 "use client"
 
 import { useState } from "react"
+import ClipLoader from "react-spinners/ClipLoader";
 
 import '@/styles/globals.css';
 import axios from "axios"
@@ -30,6 +31,8 @@ const poppinsthick = Poppins({
 
 const Login = () =>{
 
+  const[on,SetOn] = useState(null)
+
   const [formData, setFormData] = useState({
     password: '',
     email:''
@@ -47,8 +50,10 @@ const Login = () =>{
 
 
   const handleForm = async () =>{
+    SetOn(1);
      try{
     const login = await axios.post("/auth/routes/user/loginUser",formData)
+   
 
     if(login){
         console.log(login.data.user)
@@ -59,6 +64,7 @@ const Login = () =>{
     }
      }
      catch(err){
+      SetOn(null)
         console.log(err)
      }
   
@@ -121,13 +127,16 @@ const Login = () =>{
  
      return(
       <>
- <Navbar/>
-         <div className="w-full h-100 flex justify-center items-center ">
-          <div className="logw-60 login-bck pt-10 pb-10 gap-10 flex justify-center items-center flex-col">
+     
+         <div className="w-full h-100 m-0 flex justify-center items-center flex-col bck-main ">
+         <div className="w-full flex items-center justify-center  p-5">
+         <img src="/images/bitm.png" style={{width:"150px",height:"auto"}}></img> 
+      </div>
+          <div className=" w-[60vh] shadow-lg rounded-lg px-8 py-10 gap-10 flex justify-center items-center flex-col bg-white">
 
                       <div className="flex justify-center items-center flex-col">
          
-                       <h2 className="font-bold text-grey">Login</h2>
+                       <h2 className="font-bold text-2xl text-gray-600">Login</h2>
                        <p>Dont have an account yet? <span><a style={{color:"#635848"}} href="/SignUp">Sign up</a></span></p>
                        </div>
         
@@ -147,8 +156,21 @@ const Login = () =>{
 
                               </div>
 
-                              <button onClick={handleForm} className="login">Login</button>
+                              {
 
+                                  !on?
+                              <button onClick={handleForm} className="bg-yellow-500 px-10 py-2 rounded-full shadow">Login</button>
+                              :
+                              <>
+                                 <ClipLoader
+        color={"yellow"}
+       
+        size={50}
+       
+      />
+                              </>
+                               
+                                 }
 
                         </div>
          

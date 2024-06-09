@@ -12,7 +12,7 @@ const LikeSchema = new Schema({
     like : Boolean
 });
 
-mongoose.deleteModel("Likes")
+
 
 const Likes = mongoose.models.Likes  || mongoose.model('Likes',LikeSchema)
 

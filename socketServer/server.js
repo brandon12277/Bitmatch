@@ -30,6 +30,12 @@ io.on('connection', (socket) => {
     socket.broadcast.to(room).emit('sendMsg', { message, userid });
   })
 
+  socket.on('recieveImgMsg',({ room, message,userid })=>{
+    console.log(message)
+    
+    socket.broadcast.to(room).emit('sendImgMsg', {message, userid });
+  })
+
   
   socket.on('disconnect', () => {
     console.log('User disconnected');

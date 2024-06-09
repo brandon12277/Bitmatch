@@ -58,11 +58,11 @@ const General = ({ formData, setFormData,name,about,gender,age }) =>{
     <div className="w-90 mt-10 flex gap-5 ">
       <div>
        <label className="block text-gray-700 font-bold mt-5 mb-5">First Name</label>
-       <input  value = {OldData.first} type="text" name="first" onChange={handleChange}   className="in-f border-2  b-input p-4 focus:outline-none focus:border-blue-500"></input>
+       <input  value = {OldData.first} type="text" name="first" onChange={handleChange}   className="shadow-lg border-yellow-400 border-b-2 p-4 focus:outline-none focus:border-blue-500"></input>
       </div>
       <div>
       <label className="block text-gray-700 font-bold mt-5 mb-5">Last Name</label>
-      <input value ={OldData.last} type="text" name="last" onChange={handleChange}  className="in-f border-b-2  b-input  p-4 focus:outline-none focus:border-blue-500"></input>
+      <input value ={OldData.last} type="text" name="last" onChange={handleChange}  className=" shadow-lg border-yellow-400 border-b-2 p-4 focus:outline-none focus:border-blue-500"></input>
 
       </div>
       
@@ -72,7 +72,7 @@ const General = ({ formData, setFormData,name,about,gender,age }) =>{
     <div className="w-90 mt-10 flex gap-5 ">
       <div>
        <label className="block text-gray-700 font-bold mt-5 mb-5">Age</label>
-       <input  value = {OldData.age} type="number" name="age" onChange={handleChange}   className="in-f border-b-2  b-input p-4 focus:outline-none focus:border-blue-500"></input>
+       <input  value = {OldData.age} type="number" name="age" onChange={handleChange}   className="shadow-lg border-yellow-400 border-b-2 p-4 focus:outline-none focus:border-blue-500"></input>
       </div>
       
     
@@ -113,7 +113,7 @@ const General = ({ formData, setFormData,name,about,gender,age }) =>{
     <div className="w-90 flex  items-center ">
       
    
-      <textarea  value={OldData.about} type="text" name="about" onChange={handleChange} rows="5" cols="8"   className="in-f border-b-2 b-input p-4 focus:outline-none focus:border-blue-500"></textarea>
+      <textarea  value={OldData.about} type="text" name="about" onChange={handleChange} rows="5" cols="8"   className="w-full p-8 shadow-lg border-yellow-400 border-b-2  focus:outline-none focus:border-blue-500"></textarea>
       
     
     

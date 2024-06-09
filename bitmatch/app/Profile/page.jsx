@@ -197,7 +197,7 @@ const user = JSON.parse(userdata)
              
              <div className=" w-full rounded-full shadow-lg">
                
-                <div style={{width:`${profileStrength}%`}} className="flex poppins justify-start items-center  h-10 main-color rounded-full shadow-lg">
+                <div style={{width:`${profileStrength}%`}} className="flex poppins justify-start items-center p-4 h-10 bg-yellow-400 rounded-full shadow-lg">
                         <h3  className="p-3 text-white">Profile {profileStrength}% Completed</h3>
                 </div>
                
@@ -205,7 +205,7 @@ const user = JSON.parse(userdata)
              </div>
              <div className="relative">
              <button onClick={()=>{if(settings)setSettings(null); else setSettings(1)}} className="outline-none border-none ">
-                <i className=" text-4xl fa-solid fa-gear"></i>
+                <i className=" text-2xl fa-solid fa-gear"></i>
              </button>
              {
                settings?
@@ -252,7 +252,7 @@ const user = JSON.parse(userdata)
               tech = {user.userDetails.stack}
             
             />
-          <button onClick={handleForm} className={`get-start p-3  mb-10 mt-10`}>Update Profile</button>
+          <button onClick={handleForm} className={`bg-yellow-400 px-4 py-4 rounded-full shadow mb-10 mt-10`}>Update Profile</button>
             </div>
             </>
             :

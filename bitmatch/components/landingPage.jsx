@@ -25,15 +25,15 @@ const DefaultPage = () =>{
    
 
     return(
-        <div className="overflow-hidden h-100">
+        <div className="overflow-hidden">
            
         <Navbar/>
 
-         <div className ="w-full  flex flex-col">
+         <div className ="w-full  flex flex-col ">
             
-            <div className="w-full flex h-100 justify-center items-center  bck-main">
-                <div className={` w-full flex flex-col justify-center items-center intro-page text-center  gap-10`}>
-                    <div>
+            <div className="w-full flex h-100 justify-center items-start  bck-main">
+                <div className={` w-full mt-60 flex flex-col justify-center items-center intro-page text-center  gap-10`}>
+                    <div >
 
                    
                       <h1 className={` text-trans`}>
@@ -42,7 +42,7 @@ const DefaultPage = () =>{
                         Connect and Compile!!
                         </h1>
                         <br></br>
-                        <h4 className={`text-center text-below`}>
+                        <h4 className={`text-center text-libre text-white text-xl`}>
                           Your pistop to meet your optimized
                           coders  
                         </h4>
@@ -50,8 +50,8 @@ const DefaultPage = () =>{
                     </div>
 
                     <div className={`flex justify-center items-center w-full gap-10`}>
-                        <button className="get-start">Get Started</button>
-                        <button className="get-start">Learn More</button>
+                        <button className="ruluko bg-yellow-300 px-8 py-4 rounded-full font-[400] shadow">Get Started</button>
+                        <button className="ruluko bg-yellow-300 px-8 py-4 rounded-full font-[400] shadow">Learn More</button>
 
                     </div>
                            

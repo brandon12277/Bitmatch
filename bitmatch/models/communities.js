@@ -8,7 +8,7 @@ const Communities = new Schema({
     type : {
         
             type: String,
-            enum: ['male', 'female'],
+            enum: ['public', 'private'],
        
 
     },
@@ -50,7 +50,7 @@ const Communities = new Schema({
 
 });
 
-mongoose.deleteModel("Communities")
+
 
 
 const Comms = mongoose.models.Communities  || mongoose.model('Communities',Communities)

@@ -2,17 +2,20 @@
 "use client"
 import BottomNavbar from "@/components/userNavbar"
 import axios from "axios"
-import {react,useState,useEffect} from "react"
+import {react,useState,useEffect,useRef} from "react"
 import Loader from "@/components/loader"
 import "./chat.css"
-
+import ShortUniqueId from 'short-unique-id';
 import io from 'socket.io-client';
 import Picker from "emoji-picker-react";
-
+import firebaseApp from "@/utils/firebase";
+import { getStorage, ref,getDownloadURL, uploadBytes,uploadString,uploadBytesResumable } from "firebase/storage"
 
 
 const Chat_Room = () =>{
-     
+    const fileInputRef = useRef(null);
+    const [imageData,setImageData] = useState(null);
+    const [fileData,setFileData] = useState(null);
     const[roomId,setRoom] = useState(null)
      const [user,setUser] = useState(null);
      const[reciever,setRecieve] = useState(null);
@@ -50,6 +53,26 @@ const Chat_Room = () =>{
         
     });
 
+    function getCurrentDateTimeString() {
+        const now = new Date();
+      
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+      
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+      
+        const dateString = `${year}-${month}-${day}`;
+        const timeString = `${hours}:${minutes}:${seconds}`;
+      
+        // Combine date and time
+        const dateTimeString = `${dateString} ${timeString}`;
+      
+        return dateTimeString;
+      }
+
 
     const addChat = (msg,time)=>{
 
@@ -77,6 +100,58 @@ const Chat_Room = () =>{
                       <p class="time-text"> ${time}</p>
 
             </div>
+
+        </div>
+        `
+    }
+
+    const addImgInChat = (url,time)=>{
+
+      
+
+          
+
+           
+           
+           document.getElementById("msg").value = ""
+           
+
+       
+        return `
+        <div class="w-full flex flex-col justify-end items-end p-4">
+            
+
+                      <img src=${url} style="width:220px;height:auto" class="rounded">
+                      <p class="time-text"> ${time}</p>
+
+            
+
+        </div>
+        `
+    }
+
+    const sendImgInChat = (url,time)=>{
+
+       
+
+       
+
+          
+
+           
+           
+           document.getElementById("msg").value = ""
+           
+
+       
+        return `
+        <div class="w-full flex flex-col justify-start items-start p-4 rounded">
+            
+
+                      <img src=${url} style="width:220px;height:auto" class="rounded" >
+                      <p class="time-text"> ${time}</p>
+
+            
 
         </div>
         `
@@ -156,10 +231,20 @@ const Chat_Room = () =>{
                 console.log()
                 console.log(user)
                 msgs.map((msg_block)=>{
-                    if(msg_block.sender === user_d._id)
-                      chat_block.innerHTML+=addChat(msg_block.text,msg_block.date)
+                    if(msg_block.sender === user_d._id){
+                        if(msg_block.type === "text")
+                        chat_block.innerHTML+=addChat(msg_block.text,msg_block.date)
+                        else if(msg_block.type === "photo")
+                            chat_block.innerHTML+=addImgInChat(msg_block.text,msg_block.date)
+                    }
+                     
                     else
-                      chat_block.innerHTML+=sendChat(msg_block.text,msg_block.date)
+                      {
+                        if(msg_block.type === "text")
+                            chat_block.innerHTML+=sendChat(msg_block.text,msg_block.date)
+                            else if(msg_block.type === "photo")
+                                chat_block.innerHTML+=sendImgInChat(msg_block.text,msg_block.date)
+                      }
                 }) 
                 scrollToBottom("chat-block")
                 setRoom(check_room_exist.data._id)
@@ -206,6 +291,26 @@ const Chat_Room = () =>{
                let formattedTime = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
                chat.innerHTML+=sendChat(message,formattedTime)
             }
+            scrollToBottom("chat-block")
+         })
+
+         socket.on('sendImgMsg',({message,userid}) =>{
+            const user_d = JSON.parse(localStorage.getItem("user"))
+             console.log(message)
+              
+               
+            if(userid !== user_d._id)
+            {
+                const now = new Date();
+      
+
+                const hours = now.getHours(); 
+                const minutes = now.getMinutes(); 
+               let chat = document.getElementById("chat-block")
+               let formattedTime = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
+               chat.innerHTML+=sendImgInChat(message,formattedTime)
+            }
+            scrollToBottom("chat-block")
          })
         
         
@@ -214,7 +319,22 @@ const Chat_Room = () =>{
 
 
      },[])
+    
+     async function file_url(buff){
 
+        const storage = getStorage(firebaseApp);
+        const { randomUUID } = new ShortUniqueId({ length: 10 });
+        console.log(randomUUID)
+        const storageRef = ref(storage, "profile/"+randomUUID()+getCurrentDateTimeString());
+        
+        
+        
+        
+        await uploadString(storageRef, buff, 'data_url');
+        const downloadURL = await getDownloadURL(storageRef);
+        
+        return downloadURL
+        }
     
 
      const handleChange = (e) =>{
@@ -226,6 +346,67 @@ const Chat_Room = () =>{
           });
          
      }
+
+     const handleImageChange = async (e) => {
+        
+        
+        const selectedFile = e.target.files[0];
+        console.log(selectedFile)
+        setFileData({
+            ...fileData,
+           selectedFile,
+          });
+        
+        if (selectedFile) {
+          const reader = new FileReader();
+          reader.onload = async () => {
+            
+             const res = reader.result
+            setImageData({
+                ...imageData,
+               res,
+              });
+
+
+
+        const now = new Date();
+      
+
+        const hours = now.getHours(); 
+        const minutes = now.getMinutes(); 
+        let formattedTime = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
+        
+        const img_url = await file_url(res)
+        console.log("File URL : ",img_url)
+        let chat = document.getElementById("chat-block")
+        chat.innerHTML+=addImgInChat(img_url,formattedTime)
+        scrollToBottom("chat-block")
+         
+        socket.emit('recieveImgMsg', { room: roomId, message: img_url, userid:user._id }); 
+
+        let data = {
+            "person1":user._id,
+            "person2":reciever._id,
+            "text":img_url,
+            "date":formattedTime,
+            "type":"photo"
+           }
+
+           console.log(data)
+           
+           const text = await axios.post("/auth/routes/chat/addChat",data)
+            
+          };
+          reader.readAsDataURL(selectedFile);
+        }
+      };
+
+     const handleButtonClick = (e) => {
+        
+        
+        if(fileInputRef.current)
+        fileInputRef.current.click();
+      };
 
      const sendMessage = async (e) =>{
 
@@ -243,12 +424,14 @@ const Chat_Room = () =>{
             "person1":user._id,
             "person2":reciever._id,
             "text":textSend,
-            "date":formattedTime
+            "date":formattedTime,
+            "type":"text",
+           
            }
 
            console.log(data)
            
-           const text = await axios.post("/auth/routes/chat/addChat",data)
+        const text = await axios.post("/auth/routes/chat/addChat",data)
        
         let chat = document.getElementById("chat-block")
         chat.innerHTML+=addChat(textSend,formattedTime)
@@ -291,7 +474,7 @@ const Chat_Room = () =>{
                  {
                     emoji?
                     <div className="">
-                        <button onClick={()=>{setEmoji(null)}}className="border-none bg-none outline-none">
+                        <button onClick={()=>{setEmoji(null)}} className="border-none bg-none outline-none">
 
                             <i class="fa-solid fa-xmark"></i>
                         </button>
@@ -309,8 +492,8 @@ const Chat_Room = () =>{
                                     <i class="fa-solid fa-xmark"></i>
                             </button>
                         <div className="rounded shadow p-10 flex flex-col gap-5">
-
-                            <button className="w-full flex gap-2"><i style={{color:"#5b5b5b"}} class="fa-solid fa-image"></i> Photo</button>
+                        <input  ref={fileInputRef} style={{display:"none"}}  type="file" name="file" onChange={handleImageChange}  id="upload" accept="image/png, image/jpg, image/jpeg"></input>
+                            <button onClick={handleButtonClick} className="w-full flex gap-2"><i style={{color:"#5b5b5b"}} class="fa-solid fa-image"></i> Photo</button>
                             <button className="w-full flex gap-2"><i style={{color:"#5b5b5b"}} class="fa-solid fa-file"></i> Text file</button>
                             <button className="w-full flex gap-2"><i class="fa-brands fa-codepen"></i> <span style={{color:"#aa4848"}}>CodeBlock</span></button>
                             
@@ -324,13 +507,13 @@ const Chat_Room = () =>{
                     :
                     <></>
                  }
-                <div className="flex w-full gap-2 chat-bar">
+                <div className="flex w-full  chat-bar">
                 <div className="flex justify-center items-center p-4">
                    
                      
                     <button onClick={()=>{setEmoji(1)}}className="border-none bg-none outline-none">
 
-                                <i style={{color:"#5b5b5b"}} className=" text-2xl fa-regular fa-face-smile"></i>
+                                <i style={{color:"#5b5b5b"}} className=" text-xl fa-regular fa-face-smile"></i>
 
                     </button>
                   
@@ -341,7 +524,7 @@ const Chat_Room = () =>{
                      
                     <button onClick={()=>{setDoc(1)}}className="border-none bg-none outline-none">
 
-                                <i style={{color:"#5b5b5b"}} className=" text-2xl fa-solid fa-paperclip"></i>
+                                <i style={{color:"#5b5b5b"}} className=" text-xl fa-solid fa-paperclip"></i>
                                 
                                
 

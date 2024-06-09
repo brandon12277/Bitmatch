@@ -16,13 +16,14 @@ import Loader from '@/components/loader';
 const Home = () =>{
 
   const [user,setUser] = useState(null)
-  let auth = localStorage?localStorage.getItem("auth"):null
-  console.log(auth)
+  let auth = localStorage.getItem("auth");
+  
   
   
   useEffect(()=>{
 
       let userdata = localStorage.getItem("user")
+      
      
       console.log(userdata)
       setUser(JSON.parse(userdata))
@@ -48,7 +49,7 @@ const Home = () =>{
  auth && !user?
     <Loader/>
  :
-user ?
+    user ?
     <MainUserPage/>
     :
     <DefaultPage/>

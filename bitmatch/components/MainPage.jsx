@@ -198,7 +198,7 @@ return (
     <div className="w-full">
       </div> 
       <button className="outline-none border-none ">
-     <img style={{ width:"30px",height:"auto" }} src="/images/filter.png"></img> 
+     <img style={{ width:"20px",height:"auto" }} src="/images/filter.png"></img> 
      </button>
 
     </div>

@@ -1,5 +1,6 @@
 // ProfileCard.js
 import React from 'react';
+import '../styles/globals.css';
 
 const ProfileCard = (props) => {
 
@@ -16,7 +17,7 @@ const ProfileCard = (props) => {
           <div className='overflow-y-auto h-80'>
           {
             props.user.img.map((mg)=>(
-              <img src={mg}  className="w-img  " />
+              <img src={mg}  className="w-img" />
             ))
           }
          </div>

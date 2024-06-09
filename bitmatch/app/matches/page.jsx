@@ -53,17 +53,25 @@ const Matches = () =>{
 
                     const text = await axios.post("/auth/routes/chat/getLastMsg",data)
                     let textVal=""
-                    if(!text.data || text.data==="")textVal="Start Chat with "+item.name
-                    else
-                    textVal =text.data
+                    let texttype=""
+                    if(!text.data.text || text.data.text==="")textVal="Start Chat with "+item.name
+                    else{
+                    textVal =text.data.text
+
+                    texttype = text.data.type
+                    }
+
+                    console.log(text.data)
+
+                    const text_val = texttype === "photo" ? "Image File" : textVal
                 return(
                     
-                    <button onClick={()=>{myFunc(item._id)}} class="cursor" className="chat-block flex gap-5" >
+                    <button onClick={()=>{myFunc(item._id)}} class="cursor" className="chat-block flex items-center gap-5" >
                     <img className="round-img" src={item.userDetails.img[0]}></img>
                         <div className="text-left">
                           
-                           <h4>{item.name}</h4>
-                           <p className="text-gray-600  ">{textVal}</p>
+                           <h1 className="text-black">{item.name}</h1>
+                           <p className="text-gray-800 flex items-center " dangerouslySetInnerHTML={{ __html: text_val  }}></p>
 
                         </div>
 
@@ -120,7 +128,7 @@ const Matches = () =>{
             <div className="absolute  top-0 right-0 m-4 w-full flex justify-end items-center"> 
        
       <button className="outline-none border-none mt-4 mr-4 ">
-     <img style={{ width:"30px",height:"auto" }} src="/images/filter.png"></img> 
+      <img style={{ width:"20px",height:"auto" }} src="/images/filter.png"></img>
      </button>
 
     </div>
@@ -128,7 +136,7 @@ const Matches = () =>{
            <div className="w-90  p-3">
                
            
-           <h3 className={`${poppinsthick.className} card-txt text-lg  text-black-900 font-bold  capitalize `}>Hacker Queue ({ likes?likes.length:0 })</h3>
+           <h3 className={`${poppinsthick.className} card-txt text-xl  text-black-900 font-bold  capitalize `}>Hacker Queue ({ likes?likes.length:0 })</h3>
             <br></br>
             <div className="overflow-x-scroll flex gap-10">
                   {likes}
@@ -140,7 +148,7 @@ const Matches = () =>{
             
         <div className="w-90  p-3  ">
 
-        <h2 className={`${poppinsthick.className} card-txt text-lg text-black font-bold  capitalize `}>Chat Stack ({ matches?matches.length:0 }) </h2>
+        <h2 className={`${poppinsthick.className} card-txt text-xl text-black font-bold  capitalize `}>Chat Stack ({ matches?matches.length:0 }) </h2>
             <br></br>
             <div className=" overflow-y-scroll h-90 flex flex-col gap-5 p-2">
                  {matches}
