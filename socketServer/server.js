@@ -36,6 +36,16 @@ io.on('connection', (socket) => {
     socket.broadcast.to(room).emit('sendImgMsg', {message, userid });
   })
 
+  socket.on('recieveForumMsg',({ roomId, curr_msg , username ,user_img }) => {
+    console.log("message : ",curr_msg,roomId)
+    socket.broadcast.emit('sendForumMsg', { curr_msg,username,user_img });
+  })
+
+  socket.on('joinForum', (roomID) => {
+    console.log(`User joined room: ${roomID}`);
+    socket.join(roomID); 
+  });
+
   
   socket.on('disconnect', () => {
     console.log('User disconnected');
