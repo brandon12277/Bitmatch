@@ -23,12 +23,15 @@ const Home = () =>{
   
   useEffect(()=>{
 
+      if(typeof window !=undefined){
+
       let userdata = localStorage.getItem("user")
       
      
       console.log(userdata)
       setUser(JSON.parse(userdata))
       setAuth(localStorage.getItem("auth"))
+      }
 
       
 
@@ -39,9 +42,7 @@ const Home = () =>{
 
   
 
-  const redirectToLink = (url) => {
-    window.location.href = url;
-  };
+ 
 
  
      return(
