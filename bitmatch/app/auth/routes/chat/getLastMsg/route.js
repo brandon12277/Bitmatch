@@ -70,7 +70,7 @@ export async function POST(request){
               } else {
                 console.log("No messages found in the chat or messages block is empty");
                  const text = "";
-            const type =""
+                 const type =""
                 console.log("Text of the last message:", text);
                 return NextResponse.json({text : text,type  :type 
                 },{status:201});
