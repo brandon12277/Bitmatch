@@ -16,7 +16,7 @@ import Loader from '@/components/loader';
 const Home = () =>{
 
   const [user,setUser] = useState(null)
-  let auth = localStorage.getItem("auth");
+  let auth =  localStorage ? localStorage.getItem("auth") : null;
   
   
   

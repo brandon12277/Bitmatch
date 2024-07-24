@@ -51,13 +51,15 @@ return downloadURL
 
 export async function POST(request){
 
-    const { name,buffer,description,stack,visibility} =await request.json();
+    const { name,owner,buffer,description,stack,visibility} =await request.json();
     
     const img = await file_url(buffer)
     const { randomUUID } = new ShortUniqueId({ length: 10 });
     const commId = randomUUID()
     const data ={
         "name":name,
+        "owner" : owner,
+       "moderators" : [],
         "descp" :description,
         "type" : visibility,
          "img" : img,

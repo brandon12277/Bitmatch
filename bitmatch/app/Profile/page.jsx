@@ -79,7 +79,7 @@ const ProfileCreation = () =>{
     
     let len = user_d.userDetails.img.length + user_d.userDetails.stack.length + (user_d.userDetails.about === ''?0:1) + (user_d.name === ''?0:1) 
    console.log(len,user_d.userDetails.img.length,user_d.userDetails.stack.length)
-    setStrength(Math.floor((len/13)*100))
+    setStrength(Math.floor((len/21)*100))
     
      
      

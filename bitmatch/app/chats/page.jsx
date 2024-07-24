@@ -25,6 +25,12 @@ const Chat_Room = () =>{
      const[userMsgArr,setuserMsgArr] = useState([])
      const [emoji,setEmoji] = useState(null);
      const [doc,setDoc] = useState(null);
+
+     const socket = io('https://bitmatch.onrender.com');
+     socket.on('connect', () => {
+        console.log('Connected to server');
+        
+    });
      
      
      const scrollToBottom =(elementId)=> {
@@ -47,11 +53,7 @@ const Chat_Room = () =>{
      };
 
     
-     const socket = io('http://localhost:5000');
-     socket.on('connect', () => {
-        console.log('Connected to server');
-        
-    });
+    
 
     function getCurrentDateTimeString() {
         const now = new Date();

@@ -4,6 +4,20 @@ const Communities = new Schema({
     name : String,
     
     descp : String,
+
+    owner : {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Users', 
+      required: true
+      },
+
+     moderators : [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Users', 
+        }
+
+    ],
     
     type : {
         
@@ -23,7 +37,7 @@ const Communities = new Schema({
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Users', 
-            required: true
+            
         }
 
     ],

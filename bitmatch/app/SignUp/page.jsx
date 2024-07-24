@@ -8,6 +8,7 @@ import "../Login/log.css"
 import { Poppins } from 'next/font/google'
 import { Inter } from 'next/font/google'
 import axios from "axios"
+import ClipLoader from "react-spinners/ClipLoader";
  
 const poppinsthick = Poppins({
     weight: '800',

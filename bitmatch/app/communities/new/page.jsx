@@ -1,10 +1,20 @@
 "use client"
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
 const App = () => {
 
   const [checked, setCheck] = useState(Array(11).fill(false));
+
+  const [user,setUser] = useState(null)
+
+  useEffect(()=>{
+          
+    const user_d = JSON.parse(localStorage.getItem("user"))
+    console.log(user_d)
+    setUser(user_d)
+     
+  })
     
     
   const Compstack = ['ReactJs','Vue','Angular','MongoDB','Nodejs','Cyber Security','ASP.NET','JAVA','PYTHON','JAVASCRIPT','NextJS']
@@ -70,6 +80,7 @@ const App = () => {
   const fileInputRef = useRef(null);
   const [formData, setFormData] = useState({
     name: '',
+    owner : '',
     visibility: 'public',
     description: '',
     buffer: null,
@@ -106,6 +117,10 @@ const App = () => {
    
 
     try {
+      setFormData({
+        ...formData,
+        owner: user._id
+      });
         console.log(formData)
       const response = await axios.post('/auth/routes/communities/createComm', formData);
       if(response){
