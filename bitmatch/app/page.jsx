@@ -16,8 +16,12 @@ import Loader from '@/components/loader';
 const Home = () =>{
 
   const [user,setUser] = useState(null)
+  let auth ;
+  if (typeof window !== 'undefined'){
+
   
-  let auth =localStorage.getItem("auth")
+  auth =localStorage.getItem("auth")
+  }
   
   
   
