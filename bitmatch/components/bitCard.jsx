@@ -18,7 +18,7 @@ const ProfileCard = (props) => {
           {
             props.user.img.map((mg)=>(
               <div className='relative'>
-<img src={mg}  className="w-full h-[40vh] " />
+<img src={mg}  className="w-full h-[500px] " />
 <div class="absolute inset-0 bg-black opacity-40"></div>
               </div>
               

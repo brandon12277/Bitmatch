@@ -44,6 +44,7 @@ const Tech = ({ techData, setTechData,tech}) =>{
   };
 
   useEffect(()=>{
+     setTechData(prevData => tech)
       console.log(tech)
     isChecked()
     console.log(checked)
@@ -56,7 +57,7 @@ const Tech = ({ techData, setTechData,tech}) =>{
 
         console.log(checked)
        
-        
+        if(techData.length>=5 && !check)return;
         if (check) {
           setTechData(techData.filter(item => item !== value));
           setCheck({...checked,[ind]: false})

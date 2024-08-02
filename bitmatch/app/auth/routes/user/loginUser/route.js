@@ -6,22 +6,26 @@ import { NextResponse } from "next/server"
 import bcrypt from "bcrypt"
 
 export async function POST(request){
-    const { email,password} =await request.json();
+    const { email,name,password} =await request.json();
     try{
         
-        connectDb()
-        console.log(email,password)
+        await connectDb()
+        
+        console.log("Data : ",name,email,password)
         const finduser = {
             email  : email
         }
-
+         
+        console.log(finduser)
         
 
         
         const user = await Users.findOne(finduser)
          
-       
-        
+          console.log(user,user.password)
+        if(user.password === ''){
+            return NextResponse.json({user},{status:201});
+        }
         console.log(user.password)
         if(user){
             

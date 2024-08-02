@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose"
+import { Moo_Lah_Lah } from "next/font/google";
 
 const userSchema = new Schema({
     name : {
@@ -17,6 +18,9 @@ const userSchema = new Schema({
         type : Boolean
     },
     userDetails : {
+        location :{
+            type: String
+        },
         img : [{
             type:String   
        }],
@@ -27,12 +31,32 @@ const userSchema = new Schema({
             type: String,
             enum: ['male', 'female'],
         },
+        education  : [{
+            index : Number,
+            university : String,
+            branch: String
+        }],
+        ImpLinks  : [{
+            index : Number,
+            linkType : String,
+            url : String
+         }],
         about : {
             type:String
         },
         age : {
             type:Number
+        },
+        workExp :{
+            type:Number
+        },
+        currentJob:{
+            type:String
+        },
+        currentTitle:{
+            type:String
         }
+
 
 
 

@@ -9,9 +9,9 @@ import { NextRequest, NextResponse } from "next/server"
 
 export async function GET(request){
   const searchparams = request.nextUrl.searchParams
-  const id = searchparams.get("id")
+  const email = searchparams.get("email")
 
-
+  console.log(email)
 
 
     
@@ -19,16 +19,20 @@ export async function GET(request){
     try {
         
         const data = {
-          "_id" : id
+          "email" : email
          }
            
         const user= await Users.find(data)
-          
-       return NextResponse.json(user,{status:201})
+        
+        if(user.length === 0)
+       return NextResponse.json(true,{status:201})
+      else
+        return NextResponse.json(false,{status:400})
+
       } catch (error) {
         
        
-        return NextResponse.json(false,{status:400})
+        return NextResponse.json(false,{status:201})
       }
 
 }

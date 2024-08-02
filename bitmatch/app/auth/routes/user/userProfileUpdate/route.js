@@ -7,6 +7,8 @@ import bcrypt from "bcrypt"
 
 import { getStorage, ref,getDownloadURL, uploadBytes,uploadString,uploadBytesResumable } from "firebase/storage"
 
+
+
 import firebaseApp from "@/utils/firebase";
 import connectDb from "@/utils/mongodb"
 import Users from "@/models/users"
@@ -34,7 +36,14 @@ function getCurrentDateTimeString() {
 }
 
 
+function isValidUrl(url) {
+    return url.startsWith('http://') || url.startsWith('https://');
+}
+
 async function file_url(type,buff){
+
+
+if(isValidUrl(buff))return buff
 
 const storage = getStorage(firebaseApp);
 const { randomUUID } = new ShortUniqueId({ length: 10 });
@@ -53,12 +62,14 @@ return downloadURL
 
   export async function POST(req,res){
        
-      const { name,about,gender,buff,types,techData,email ,age} = await req.json()
+      const { name,about,gender,buff,types,techData,email ,age,education,ImpLinks,currentJob,currentTitle,workExp,location} = await req.json()
       await connectDb()
+      
       const imgs = []
       console.log(about)
 
       const urls =  buff.map(async (buffer,idx)=>{
+        
 
         const url = await file_url(types[idx],buffer)
         return url
@@ -73,10 +84,16 @@ return downloadURL
       const userDetails = {
         
            "img" : url_imgs,
+           "location" : location,
             "stack": techData,
             "gender" : gender,
             "about":about,
-            "age":age
+            "age":age,
+            "currentJob" : currentJob,
+            "currentTitle" : currentTitle,
+            "education" : education,
+            "ImpLinks" : ImpLinks,
+             "workExp" : workExp
             
      }
 

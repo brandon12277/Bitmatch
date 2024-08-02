@@ -15,12 +15,13 @@ import ImagesSelect from "@/components/profileImages";
 import Tech from "@/components/profileTechStack";
 
 import { getStorage, ref,getDownloadURL, uploadBytes,uploadString,uploadBytesResumable } from "firebase/storage"
-
+import { getAuth } from "firebase/auth"
 import firebaseApp from "@/utils/firebase";
+
 import BottomNavbar from "@/components/userNavbar";
 import Loader from "@/components/loader";
-
-
+import ShortUniqueId from 'short-unique-id';
+import ClipLoader from "react-spinners/ClipLoader";
 
  
 const poppinsthick = Poppins({
@@ -35,6 +36,7 @@ const poppinsthick = Poppins({
 const ProfileCreation = () =>{
     
     const [page,setPage] = useState(1)
+    const[on,setOn] = useState(null)
     const [settings,setSettings] = useState(null)
     const [techData,setTechData] = useState([])
     const [profileStrength,setStrength] = useState(0)
@@ -66,13 +68,26 @@ const ProfileCreation = () =>{
    const [formData, setFormData] = useState({
     first: '',
     last: '',
+    location : '',
     about:'',
     gender:'',
-    age:''
+    age:'',
+    workExp : '',
+    currentJob : '',
+    currentTitle : '',
+    education : [
+      { index: 1, university: '', branch: '' }
+     ],
+    links :[
+      { index: 1, linkType: '', url: '' }
+     ],
+
   });
   
 
   useEffect(()=>{
+    const auth = getAuth(firebaseApp);
+    console.log(auth.currentUser)
     const user_d = JSON.parse(localStorage.getItem("user"))
     console.log(user_d)
     setUser(user_d)
@@ -85,32 +100,16 @@ const ProfileCreation = () =>{
      
   },[])
 
-  function getCurrentDateTimeString() {
-    const now = new Date();
-  
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-  
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-  
-    const dateString = `${year}-${month}-${day}`;
-    const timeString = `${hours}:${minutes}:${seconds}`;
-  
-    // Combine date and time
-    const dateTimeString = `${dateString} ${timeString}`;
-  
-    return dateTimeString;
-  }
 
 
+  
+  
 
 
       
 
   const handleForm = async () =>{
+    setOn(1)
    
     const files = []
     const buffer = []
@@ -119,6 +118,8 @@ const ProfileCreation = () =>{
            if(file && file !="")files.push(file.type)
     })
     console.log(imageData)
+
+    
     Object.values(imageData).map((buff,ind)=>{
       if(buff && buff !=""){
       console.log(buff)
@@ -132,9 +133,11 @@ const ProfileCreation = () =>{
 
 
 
-let userdata = localStorage.getItem("user")
-console.log(JSON.parse(userdata))
-const user = JSON.parse(userdata)
+
+
+// let userdata = localStorage.getItem("user")
+// console.log(JSON.parse(userdata))
+// const user = JSON.parse(userdata)
 
 
     const data = {
@@ -145,7 +148,13 @@ const user = JSON.parse(userdata)
       "buff" : buffer,
       "types" : files,
       "techData" : techData,
-      "email" : user.email
+      "email" : user.email,
+      "education":formData.education,
+      "ImpLinks":formData.links,
+      "workExp":formData.workExp,
+      "currentJob":formData.currentJob,
+      "currentTitle":formData.currentTitle,
+      "location":formData.location
 
     }
 
@@ -198,7 +207,7 @@ const user = JSON.parse(userdata)
              <div className=" w-full rounded-full shadow-lg">
                
                 <div style={{width:`${profileStrength}%`}} className="flex poppins justify-start items-center p-4 h-10 bg-yellow-400 rounded-full shadow-lg">
-                        <h3  className="p-3 text-white">Profile {profileStrength}% Completed</h3>
+                        <h3  className="p-3 text-white">Profile {profileStrength}% </h3>
                 </div>
                
 
@@ -244,6 +253,13 @@ const user = JSON.parse(userdata)
                about = {user.userDetails.about}
                gender = {user.userDetails.gender}
                age = {user.userDetails.age}
+               education = {user.userDetails.education}
+               links = {user.userDetails.ImpLinks}
+               currentJob = {user.userDetails.currentJob}
+               currentTitle = {user.userDetails.currentTitle}
+               workExp = {user.userDetails.workExp}
+               location = {user.userDetails.location}
+
             
             />
             <Tech
@@ -252,7 +268,24 @@ const user = JSON.parse(userdata)
               tech = {user.userDetails.stack}
             
             />
-          <button onClick={handleForm} className={`bg-yellow-400 px-4 py-4 rounded-full shadow mb-10 mt-10`}>Update Profile</button>
+  {
+!on?
+
+<button onClick={handleForm} className={`bg-yellow-400 px-4 py-4 rounded-full shadow mb-10 mt-10`}>Update Profile</button>            
+
+:
+<>
+<ClipLoader
+color={"yellow"}
+
+size={50}
+
+/>
+</>
+
+}
+
+        
             </div>
             </>
             :

@@ -10,11 +10,12 @@ import toast, { Toaster } from "react-hot-toast";
 import { Poppins } from 'next/font/google'
 import { Inter } from 'next/font/google'
 import firebase_app from "@/utils/firebase";
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import CryptoJS from 'crypto-js';
 import "./log.css"
 import Navbar from "@/components/navbar";
- 
+import { getAuth,signInWithPopup, GoogleAuthProvider,signInWithEmailAndPassword } from "firebase/auth"
+import firebaseApp from "@/utils/firebase";
+import { useRouter } from "next/navigation";
 const poppinsthick = Poppins({
     weight: '800',
     subsets: ['latin'],
@@ -32,7 +33,10 @@ const poppinsthick = Poppins({
 const Login = () =>{
 
   const[on,SetOn] = useState(null)
-
+  const[google,SetGoog] = useState(null)
+  const[error,setErr] = useState(null)
+  const router = useRouter();
+  
   const [formData, setFormData] = useState({
     password: '',
     email:''
@@ -56,7 +60,10 @@ const Login = () =>{
    
 
     if(login){
+         const auth = getAuth(firebaseApp);
+       
         console.log(login.data.user)
+        const userCredential = await signInWithEmailAndPassword(auth,login.data.user.email,formData.password);
         localStorage.setItem("user",JSON.stringify(login.data.user))
         localStorage.setItem("auth",true)
         notifySuccess("Congratulation!! You logged in")
@@ -65,7 +72,8 @@ const Login = () =>{
      }
      catch(err){
       SetOn(null)
-        console.log(err)
+        console.log(err.response)
+        setErr(err.response.data.message)
      }
   
    
@@ -73,57 +81,72 @@ const Login = () =>{
       
   }
 
-  const googleProvider = new GoogleAuthProvider();
-  const auth = getAuth(firebase_app);
+  const loginWithGoogle = async () => {
+    SetGoog(1);
+    try {
+      
+     
+       const auth = getAuth(firebaseApp);
 
-  async function googleSignIn() {
-   let result = null,
-     error = null;
-   try {
-     result = await signInWithPopup(auth, googleProvider);
-       if (result.user) {
-           const userData = {
-               uid: result.user.uid,
-               name: result.user.displayName,
-               img: result.user.photoURL,
-               email: result.user.email,
-             };
-
-           console.log(userData)
-           const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(userData), 'secret key 123').toString();
-           localStorage.setItem('user', ciphertext);
-           localStorage.setItem('auth', "true");
-
-           return true;
-       } else {
-         throw new Error("Access denied. Your email does not match xyz@gmail.com.");
-       }
-   } catch (e) {
-     error = e;
-   }
- 
-   return { result: false, error };
- }
+         signInWithPopup(auth,new GoogleAuthProvider())
+         .then(async (userCredential) => {
+            if (userCredential) {
+               const user = userCredential.user;
+        
+         
+        
+        
+        
+        const form_data = {
+          name : userCredential.user.displayName,
+          email : userCredential.user.email,
+          password  : '',
+          
+        }
+        
+        console.log(form_data)
+        try{
+        const login = await axios.post("/auth/routes/user/loginUser",form_data)
 
 
- const googleClick = async (e) => {
-   e.preventDefault();
-   try {
-     const { result, error } = await googleSignIn();
-     if (error) {
-       notify("Login failed, Please try again");
-       return;
-     } else {
-       notifySuccess("Congratulations! 🎉 Your login was successful");
-       window.location.href = '/';
-       return;
+  if(login){
+   console.log(login.data.user)
+   localStorage.setItem("user",JSON.stringify(login.data.user))
+   localStorage.setItem("auth",true)
+   
+   router.push("/")
+}
+}
+catch(err){
+ console.log(err)
+ axios.post('/auth/routes/user/createUser', form_data)
+ .then((res)=>{
+   console.log(res.data.user)
+   localStorage.setItem('user', JSON.stringify(res.data.user));
+   localStorage.setItem("auth",true)
+   notifySuccess("Congratulation!! You logged in")
+   return router.push("/")
+ })
+ .catch(async err=>{
+   
+})
+}
+        
        
-     }
-   } catch (error) {
-     notify("Login failed, Please try again");
-     return;
-   }
- };
+        
+         
+            }
+         });
+      
+      
+    }
+    catch (error) {
+      console.log(error)
+    }
+
+   };
+
+ 
  
      return(
       <>
@@ -138,6 +161,7 @@ const Login = () =>{
          
                        <h2 className="font-bold text-2xl text-gray-600">Login</h2>
                        <p>Dont have an account yet? <span><a style={{color:"#635848"}} href="/SignUp">Sign up</a></span></p>
+                       <p className="mt-6">{error}</p>
                        </div>
         
                         <div className="w-full m-5 flex flex-col justify-center items-center gap-5">
@@ -171,6 +195,29 @@ const Login = () =>{
                               </>
                                
                                  }
+<div className="w-full flex gap-2 items-center justify-center">
+   <hr className="h-1  w-full "></hr>
+   <h2 className="text-gray-500 w-full ">Or Sign Up Using</h2>
+   <hr className="h-1  w-full"></hr>
+</div>
+
+
+{
+
+!google?
+<button onClick={loginWithGoogle} className="bg-yellow-500 px-10 py-2 flex gap-2 items-center  rounded-full shadow"><img className="w-4 w-4" src="images/goog.png"></img>Google</button>
+
+:
+<>
+<ClipLoader
+color={"yellow"}
+
+size={50}
+
+/>
+</>
+
+}
 
                         </div>
          

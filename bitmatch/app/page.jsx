@@ -16,8 +16,8 @@ import Loader from '@/components/loader';
 const Home = () =>{
 
   const [user,setUser] = useState(null)
-  const [auth,setAuth] = useState(null)
   
+  let auth =localStorage.getItem("auth")
   
   
   
@@ -27,10 +27,10 @@ const Home = () =>{
 
       let userdata = localStorage.getItem("user")
       
-     
+      
       console.log(userdata)
       setUser(JSON.parse(userdata))
-      setAuth(localStorage.getItem("auth"))
+      
       }
 
       
