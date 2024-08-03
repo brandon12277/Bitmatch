@@ -16,7 +16,7 @@ import Loader from '@/components/loader';
 const Home = () =>{
 
   const [user,setUser] = useState(null)
-  let auth ;
+  let auth = 1 ;
   if (typeof window !== 'undefined'){
 
   

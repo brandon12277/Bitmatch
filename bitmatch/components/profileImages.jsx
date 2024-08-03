@@ -144,7 +144,7 @@ const ImagesSelect = ({ imageData, setImageData,fileData, setFileData ,imgs}) =>
                         <div data-key={ind} onClick={handleButtonClick} className="z-1  w-40 h-40 rounded-[0.45em] shadow-xl flex items-center justify-center cursor-pointer bg-center bg-cover" htmlFor="upload" style={{ backgroundImage: `url(${ imageData[ind+1] })` }}>
 
 {image && checkInd == ind+1 && (
-        <div className='z-10 absolute top-0 left-0 w-full h-screen flex flex-col items-center justify-center gap-4'>
+        <div className='z-10 fixed top-0 left-0 w-full h-screen flex flex-col items-center justify-center gap-4'>
           <div className='z-10 ' style={{ width: '500px', height: '500px' }}>
             <Cropper
               image={image}

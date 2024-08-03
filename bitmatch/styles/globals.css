@@ -277,6 +277,7 @@ html{
 
   .card-bck{
     background-color: #ffdca7;
+    border: none;
   }
 
   .bottom-fixed {

@@ -89,10 +89,10 @@ const Matches = () =>{
 
             const likesObj = Object.values(likes.data.likes).map((item)=>(
                 <div>
-                    <div className="card-like" >
+                    <div className=" card-like ml-2 mb-2 mt-2 border border-gray-400 flex flex-col items-center justify-center" >
 
-                        <img className="round-img" src={item.userDetails.img[0]}></img>
-                        <h3 className="text-black">{item.name}</h3>
+                        <img className="blur p-4 rounded-full" src={item.userDetails.img[0]}></img>
+                        <h3 className="blur text-black">{item.name}</h3>
 
                     </div>
                     
@@ -137,6 +137,21 @@ const Matches = () =>{
                
            
            <h3 className={`${poppinsthick.className} card-txt text-xl  text-black-900 font-bold  capitalize `}>Hacker Queue ({ likes?likes.length:0 })</h3>
+           {
+            likes && likes.length === 0?
+            <>
+                 
+                 <div className="mt-4 rounded shadow-lg flex items-center justify-center p-16 card-like" >
+
+                <img className="w-40 h-40" src="/images/coding.png"></img>
+                <h3 className="text-sm text-black">No one has matched with your profile yet</h3>
+
+                </div>
+                             
+            </>
+            :
+            <></>
+           }
             <br></br>
             <div className="overflow-x-scroll flex gap-10">
                   {likes}

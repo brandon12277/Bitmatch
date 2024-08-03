@@ -22,6 +22,7 @@ import BottomNavbar from "@/components/userNavbar";
 import Loader from "@/components/loader";
 import ShortUniqueId from 'short-unique-id';
 import ClipLoader from "react-spinners/ClipLoader";
+import ProfileCard from "@/components/bitCard";
 
  
 const poppinsthick = Poppins({
@@ -36,6 +37,8 @@ const poppinsthick = Poppins({
 const ProfileCreation = () =>{
     
     const [page,setPage] = useState(1)
+    const [profile,setProfile] = useState(null)
+    const [profileCard,setCard] = useState(null)
     const[on,setOn] = useState(null)
     const [settings,setSettings] = useState(null)
     const [techData,setTechData] = useState([])
@@ -90,14 +93,42 @@ const ProfileCreation = () =>{
     console.log(auth.currentUser)
     const user_d = JSON.parse(localStorage.getItem("user"))
     console.log(user_d)
-    setUser(user_d)
+    setUser((prev)=> user_d)
+    
     
     let len = user_d.userDetails.img.length + user_d.userDetails.stack.length + (user_d.userDetails.about === ''?0:1) + (user_d.name === ''?0:1) 
    console.log(len,user_d.userDetails.img.length,user_d.userDetails.stack.length)
     setStrength(Math.floor((len/21)*100))
     
+
+    let user_block = {
+      "name": user_d.name,
+      "about": user_d.userDetails.about,
+      "gender":user_d.userDetails.gender
+    }
+    
+    user_block["img"] = user_d.userDetails.img
+    user_block["age"] = user_d.userDetails.age
+    user_block["techStack"] = user_d.userDetails.stack
+    user_block["education"]= user_d.userDetails.education
+    user_block["workExp"] = user_d.userDetails.workExp 
+    user_block["links"] = user_d.userDetails.ImpLinks
+    user_block["location"]= user_d.userDetails.location
+    user_block["job"] = user_d.userDetails.job 
+    user_block["title"] = user_d.userDetails.currentTitle
+    
+   console.log(user_block)
+
+    const card = <ProfileCard
      
-     
+    user = {user_block}
+    display={true}
+    
+    />
+
+    setCard(card)
+
+
   },[])
 
 
@@ -220,7 +251,9 @@ const ProfileCreation = () =>{
                settings?
              <div className="z-20 flex flex-col gap-5 bg-white absolute right-0 p-10 shadow rounded">
              
-             <button className="flex gap-2 items-center outline-none border-none w-full" onClick={()=>{}} ><i class="fa-regular fa-id-card"></i> Profile</button>
+             <button className="flex gap-2 items-center outline-none border-none w-full" onClick={()=>{
+                   setProfile(1)
+                 }} ><i class="fa-regular fa-id-card"></i> Profile</button>
                   <button className="flex gap-2 items-center outline-none border-none w-full" onClick={Logout}><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
                   
                     
@@ -233,6 +266,29 @@ const ProfileCreation = () =>{
             
                 
            </div>
+           {
+             profile && profileCard && user.userProfileSet ?
+             <div className="overflow-hidden bg-black bg-opacity-50 fixed top-0 left-0 w-full h-100 flex justify-center items-center">
+              <div className=" overflow-hidden ">
+              
+              <button className="bg-black  rounded-lg p-4 text-white absolute top-0 left-0 m-6" onClick={()=>{
+                   setProfile(null)
+                 }} >Close</button>   
+                 <h4 className="text-white ">Note : Click Update Button to view Updates in Profile Card</h4>
+                  <div className="z-10 ">
+                    {profileCard}
+                  </div>
+
+              </div>
+               
+                    
+             </div>
+            
+             :
+             <></>
+              
+           }
+          
             <div  className ={`${poppinsthick.className} ml-5 w-full justify-center `}>
             
 

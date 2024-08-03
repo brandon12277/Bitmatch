@@ -5,11 +5,13 @@ import BottomNavbar from "./userNavbar"
 import ProfileCard from "./bitCard"
 import axios from "axios"
 import Loader from "./loader"
+import { Link } from "react-router-dom"
 
 
 const MainUserPage = () =>{
 
     const [swipeComponent,setSwipe] = useState(null)
+  
     const [userD,setUser] = useState(null)
     const[ filter,setFilter ] = useState(null)
     const[filterData,setFilterData] = useState({
@@ -79,8 +81,14 @@ const MainUserPage = () =>{
      }
      
      user_block["img"] = user.userDetails.img
-     user_block["age"] = user.userDetails.age
-     user_block["techStack"] = user.userDetails.stack
+    user_block["age"] = user.userDetails.age
+    user_block["techStack"] = user.userDetails.stack
+    user_block["education"]= user.userDetails.education
+    user_block["workExp"] = user.userDetails.workExp 
+    user_block["links"] = user.userDetails.ImpLinks
+    user_block["location"]= user.userDetails.location
+    user_block["job"] = user.userDetails.job 
+    user_block["title"] = user.userDetails.currentTitle
      
    if(user._id === userD._id){
      localStorage.setItem("user",JSON.stringify(user))
@@ -132,7 +140,10 @@ setFilter(null)
  }
 
 
-
+ const circle_css = {
+  
+   clipPath: "ellipse(54% 34% at 0% 9%)"
+ }
 
 
  
@@ -197,6 +208,7 @@ setFilter(null)
                           like={()=>{like(classN,user._id)}}
                           dislike={()=>{dislike(classN,user._id)}}
                           user = {user_block}
+                          display={false}
                            />
                          </div>
                      )
@@ -296,14 +308,22 @@ return (
     <>
        <BottomNavbar/>
        <div className="w-full flex justify-center items-center main-bck">
+        
     <div className="relative w-full flex  justify-center items-center h-100 relative top-0 uni-border ">
-       <div className="mt-7 w-70  flex flex-col justify-center items-center relative overflow-y-auto card-90  max-w-md bg-white shadow-top  rounded-lg overflow-hidden">
-                       <div className=" w-full flex flex-col justify-center items-center">
-                          <img  style={{width:"300px",height:"auto"}} src="/images/end2.png"></img>
-                         <p className="end-page">Profile isnt created yet..go and create your profile to start swiping</p>
+       
+    <div className="bg-black bg-opacity-70 absolute top-0 w-full h-100 flex items-center justify-center">
+                       <div style={circle_css} className=" w-full h-100 text-center text-black absolute top-0 left-0 bg-white  flex flex-col justify-start items-start">
+                         <div className="m-20 flex flex-col items-start gap-6">
+
+                         <p className="end-page font-lg text-2xl">Profile isnt created yet..go and create your profile to start swiping</p>
+                         <button className="bg-black rounded-lg shadow-lg  text-white p-2"><a href="/Profile">Go to Profile</a></button>
+
+                         </div>
+                         
 
                        </div>
-        </div>
+    </div>
+      
     </div>
         </div>
   
@@ -324,8 +344,11 @@ return (
       filter?
       <div className="bg-black bg-opacity-50 absolute top-0 w-full h-100 flex items-center justify-center">
         <div className="p-10 z-10">
-
-          <div className="h-[80vh] overflow-scroll w-full px-16 z-10 bg-white flex flex-col gap-6 rounded-xl shadow-lg">
+        <button className="bg-black  rounded-lg p-4 text-white absolute top-0 left-0 m-6" onClick={()=>{
+                   setFilter(null)
+                 }} >Close</button>
+          <div className="h-[80vh] overflow-scroll w-full px-16 py-4 z-10 bg-white flex flex-col gap-6 rounded-xl shadow-lg">
+          <h1 className="font-semibold text-3xl">Filter User Data</h1>
                     <div className="w-full p-4">
                         <h1 className="font-semibold text-xl">Location</h1>
                         <input onChange={handleChange} type="text" name="location"  className="w-full shadow-lg border-yellow-400 border-b-2 p-4 focus:outline-none focus:border-blue-500"></input>
@@ -333,6 +356,7 @@ return (
                     <div className="w-full p-4">
                         <h1 className="font-semibold text-xl">Work Experience</h1>
                         <input onChange={handleChange} value={filterData.workExp} type="range" className="w-full bg-yellow" name="workExp" min="0" max="40" step="1"></input>
+                        <p>{filterData.workExp}</p>
                     </div>
                     {
                 stack.map((item,ind)=>(

@@ -161,11 +161,11 @@ const SignUp = () =>{
            })
            .catch(async err=>{
             setOn(null)
-             console.log(err)
+             console.log(String(err))
              if(err.response || err){
                if(err.response)setErr(err.response.data)
                else
-               setErr(err)
+               setErr(String(err))
              }
              
              else
