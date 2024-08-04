@@ -23,7 +23,7 @@ import Loader from "@/components/loader";
 import ShortUniqueId from 'short-unique-id';
 import ClipLoader from "react-spinners/ClipLoader";
 import ProfileCard from "@/components/bitCard";
-
+import { useRouter } from "next/navigation";
  
 const poppinsthick = Poppins({
     weight: '400',
@@ -56,7 +56,7 @@ const ProfileCreation = () =>{
         6:''
         
     });
-
+    const router = useRouter();
     const [fileData, setFileData] = useState({
        
        1:'',
@@ -93,6 +93,11 @@ const ProfileCreation = () =>{
     console.log(auth.currentUser)
     const user_d = JSON.parse(localStorage.getItem("user"))
     console.log(user_d)
+
+    if(!user_d){
+      router.push("/")
+      return;
+  }
     setUser((prev)=> user_d)
     
     

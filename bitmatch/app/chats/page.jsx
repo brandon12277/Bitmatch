@@ -10,10 +10,11 @@ import io from 'socket.io-client';
 import Picker from "emoji-picker-react";
 import firebaseApp from "@/utils/firebase";
 import { getStorage, ref,getDownloadURL, uploadBytes,uploadString,uploadBytesResumable } from "firebase/storage"
-
+import { useRouter } from "next/navigation";
 
 const Chat_Room = () =>{
     const fileInputRef = useRef(null);
+    const router = useRouter();
     const [imageData,setImageData] = useState(null);
     const [fileData,setFileData] = useState(null);
     const[roomId,setRoom] = useState(null)
@@ -31,6 +32,10 @@ const Chat_Room = () =>{
         console.log('Connected to server');
         
     });
+
+    useEffect(()=>{
+
+    })
      
      
      const scrollToBottom =(elementId)=> {
@@ -198,6 +203,9 @@ const Chat_Room = () =>{
         
          
         const user_d = JSON.parse(localStorage.getItem("user"))
+        if(!user_d){
+            router.push("/")
+        }
         setUser(user_d)
 
        

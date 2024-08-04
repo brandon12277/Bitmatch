@@ -5,15 +5,17 @@ import BottomNavbar from "@/components/userNavbar";
 import { useEffect, useState } from "react";
 import io from 'socket.io-client';
 import axios from "axios";
-
+import { useRouter } from "next/navigation";
+import Loader from "@/components/loader";
 const Comms =()=>{
-
+   
     const [search,setSearch] = useState(null)
    const [comms,setComms] = useState(null)
    const [searchRes,setRes] = useState(null)
    const [msgs,setMsgs] = useState([])
    const [curr_msg,setCurrMsg] = useState("")
-
+   const [user,setUser] = useState("")
+   const router = useRouter();
    const socket = io('https://bitmatch.onrender.com');
    socket.on('connect', () => {
       console.log('Connected to server');
@@ -22,8 +24,16 @@ const Comms =()=>{
 
 
    useEffect(()=>{
-
+     
+    const user_d = JSON.parse(localStorage.getItem("user"))
+    if(!user_d){
+        router.push("/")
+    }
+    setUser(user_d)
     const FormData = async () =>{
+           
+       
+        
 
         const response = await axios.get('/auth/routes/communities/getComms')
          
@@ -191,6 +201,13 @@ const Comms =()=>{
 
     return (
         <>
+        {
+            !user && !comms?
+            <Loader/>
+            :
+
+    <>
+        
         <BottomNavbar/>
 
 <div className="w-full flex justify-center items-center relative">
@@ -254,8 +271,10 @@ const Comms =()=>{
 
 </div>
 
-
+</>
+}
         </>
+   
     )
 }
 

@@ -6,6 +6,7 @@ import {react,useState,useEffect} from "react"
 import "./match.css"
 import Loader from "@/components/loader"
 import { Poppins } from 'next/font/google'
+import { useRouter } from "next/navigation";
 
 
 const poppinsthick = Poppins({
@@ -16,7 +17,7 @@ const poppinsthick = Poppins({
 const Matches = () =>{
 
     
-
+    const router = useRouter();
     const [likes,setLikes] = useState(null)
     const [matches,setMatches] = useState(null)
 
@@ -30,7 +31,12 @@ const Matches = () =>{
         const FetchData = async () =>{
 
             const user = JSON.parse(localStorage.getItem("user"))
+            if(!user){
+                router.push("/")
+            }
             const id = user._id
+
+
 
             const data = {
               "id" : id

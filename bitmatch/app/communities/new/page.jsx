@@ -1,17 +1,21 @@
 "use client"
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-
+import { useRouter } from "next/navigation";
 const App = () => {
 
   const [checked, setCheck] = useState(Array(11).fill(false));
-
+  const router = useRouter();
   const [user,setUser] = useState(null)
 
   useEffect(()=>{
           
     const user_d = JSON.parse(localStorage.getItem("user"))
     console.log(user_d)
+   
+    if(!user_d){
+        router.push("/")
+    }
     setUser(user_d)
      
   })

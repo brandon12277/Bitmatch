@@ -17,6 +17,7 @@ const Comm = ({ params }) =>{
     const { id } = params
     const [comm,setComm] = useState(null)
     const [user,setUser] = useState(null);
+    const router = useRouter();
    
      
     useEffect(()=>{
@@ -29,6 +30,11 @@ const Comm = ({ params }) =>{
         let userdata = localStorage.getItem("user")
       
         const user_d = JSON.parse(userdata)
+
+        
+        if(!user_d){
+            router.push("/")
+        }
         
         setUser(user_d)
 
