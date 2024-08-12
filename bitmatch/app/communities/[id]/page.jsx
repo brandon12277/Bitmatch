@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import io from 'socket.io-client';
 import ChatForum from "./ChatForum";
 import BottomNavbar from "@/components/userNavbar";
+import { useRouter } from "next/navigation";
 
 
 const Comm = ({ params }) =>{
@@ -21,6 +22,9 @@ const Comm = ({ params }) =>{
    
      
     useEffect(()=>{
+         
+      // just for now until feature is implemented
+         router.push("/")
 
         socket.on('disconnect', () => {
             console.log('Disconnected from server');

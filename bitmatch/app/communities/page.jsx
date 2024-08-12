@@ -200,82 +200,86 @@ const Comms =()=>{
      })
 
     return (
-        <>
-        {
-            !user && !comms?
-            <Loader/>
-            :
+    <div className="w-full h-screen flex items-center justify-center">
+    COMING SOON
+    </div>
+    )
+//         <>
+//         {
+//             !user && !comms?
+//             <Loader/>
+//             :
 
-    <>
+//     <>
         
-        <BottomNavbar/>
+//         <BottomNavbar/>
 
-<div className="w-full flex justify-center items-center relative">
-        <div className="uni-border relative flex">
+// <div className="w-full flex justify-center items-center relative">
+//         <div className="uni-border relative flex">
 
-           <div className=" px-2  py-6 w-[35vh] flex items-start justify-center border">
+//            <div className=" px-2  py-6 w-[35vh] flex items-start justify-center border">
 
-               <button className=" px-8 py-2 poppins  inline-flex items-center rounded-lg shadow-lg font-semibold text-black-500  bg-yellow-500  " onClick={()=>{ window.location.href= "/communities/new"}}>+ New Community</button>
+//                <button className=" px-8 py-2 poppins  inline-flex items-center rounded-lg shadow-lg font-semibold text-black-500  bg-yellow-500  " onClick={()=>{ window.location.href= "/communities/new"}}>+ New Community</button>
 
-           </div>
+//            </div>
            
-           <div className="w-full flex items-center justify-start flex-col">
+//            <div className="w-full flex items-center justify-start flex-col">
 
 
-            <div className="w-full flex items-center gap-4 justify-center p-4">
+//             <div className="w-full flex items-center gap-4 justify-center p-4">
 
-            <div className="w-full flex flex-col gap-6 items-center justify-center">
-                <div className="w-full flex items-center justify-center">
+//             <div className="w-full flex flex-col gap-6 items-center justify-center">
+//                 <div className="w-full flex items-center justify-center">
 
                
-              <input   type="text" name="age" onChange={(e)=>{setSearch(e.target.value) }}   className=" w-80 border-l border-t border-b border-gray-800 border-r-0 rounded-l-lg p-2 focus:outline-none focus:border-blue-500"></input>
-              <button onClick={getNames} class="bg-gray-800 shadow rounded-r-full p-2 border-r border-t border-b border-gray-800 border-l-0  text-white">
-                        Search
-            </button>
-            </div>
-            <>
-            {searchRes}
-            </>
-            </div>
+//               <input   type="text" name="age" onChange={(e)=>{setSearch(e.target.value) }}   className=" w-80 border-l border-t border-b border-gray-800 border-r-0 rounded-l-lg p-2 focus:outline-none focus:border-blue-500"></input>
+//               <button onClick={getNames} class="bg-gray-800 shadow rounded-r-full p-2 border-r border-t border-b border-gray-800 border-l-0  text-white">
+//                         Search
+//             </button>
+//             </div>
+//             <>
+//             {searchRes}
+//             </>
+//             </div>
 
-            <button className="outline-none border-none ">
-     <img style={{ width:"20px",height:"auto" }} src="/images/filter.png"></img> 
-     </button>
+//             <button className="outline-none border-none ">
+//      <img style={{ width:"20px",height:"auto" }} src="/images/filter.png"></img> 
+//      </button>
 
            
-            </div>
+//             </div>
 
 
-            <div className="w-full p-4 overflow-scroll h-[80vh] flex flex-col gap-8">
+//             <div className="w-full p-4 overflow-scroll h-[80vh] flex flex-col gap-8">
 
-                    {
-                        comms?
-                        <>
-                        {comms}
-                        </>
-                        :
-                        <>
-                        </>
-                    }
+//                     {
+//                         comms?
+//                         <>
+//                         {comms}
+//                         </>
+//                         :
+//                         <>
+//                         </>
+//                     }
 
-            </div>
+//             </div>
 
-            </div>
+//             </div>
 
           
                
 
  
-        </div>
+//         </div>
        
 
-</div>
+// </div>
 
-</>
-}
-        </>
+// </>
+// }
+//         </>
    
-    )
+    // )
 }
 
 export default Comms;

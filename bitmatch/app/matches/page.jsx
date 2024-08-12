@@ -133,9 +133,7 @@ const Matches = () =>{
 
             <div className="absolute  top-0 right-0 m-4 w-full flex justify-end items-center"> 
        
-      <button className="outline-none border-none mt-4 mr-4 ">
-      <img style={{ width:"20px",height:"auto" }} src="/images/filter.png"></img>
-     </button>
+    
 
     </div>
 

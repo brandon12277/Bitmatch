@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from "next/navigation";
+import Loader from '@/components/loader';
 const App = () => {
 
   const [checked, setCheck] = useState(Array(11).fill(false));
@@ -9,6 +10,9 @@ const App = () => {
   const [user,setUser] = useState(null)
 
   useEffect(()=>{
+
+      // just for now until feature is implemented
+      router.push("/")
           
     const user_d = JSON.parse(localStorage.getItem("user"))
     console.log(user_d)
@@ -18,7 +22,7 @@ const App = () => {
     }
     setUser(user_d)
      
-  })
+  },[])
     
     
   const Compstack = ['ReactJs','Vue','Angular','MongoDB','Nodejs','Cyber Security','ASP.NET','JAVA','PYTHON','JAVASCRIPT','NextJS']
@@ -136,6 +140,11 @@ const App = () => {
   };
 
   return (
+    <>
+    {
+          !user ?
+           <Loader/>
+                  :
     <div className="w-full flex flex-col items-center justify-center bg-gray-100 p-4">
       <div
         className="w-full  bg-white rounded-lg shadow-md p-6 cursor-pointer mb-4"
@@ -233,6 +242,8 @@ const App = () => {
        </div>
       </form>
     </div>
+  }
+  </>    
   );
 };
 
