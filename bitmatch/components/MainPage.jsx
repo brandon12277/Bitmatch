@@ -207,7 +207,7 @@ setFilter(null)
                       localStorage.setItem("user",JSON.stringify(user))
                       
                     }
-                    if( user._id !=user_d._id  && !liked.includes(user._id)){
+                    if( user._id !=user_d._id  && !liked.includes(user._id) && user.userProfileSet!=false){
                      const swipe = (
                       
                         <div className={`${classN} flex flex-col absolute justify-center items-center user1`}>
