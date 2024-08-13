@@ -90,11 +90,12 @@ const MainUserPage = () =>{
     user_block["job"] = user.userDetails.job 
     user_block["title"] = user.userDetails.currentTitle
      
+    console.log("HELOOOO",user_block)
    if(user._id === userD._id){
      localStorage.setItem("user",JSON.stringify(user))
      
    }
-   if( user._id !=userD._id  && !liked.includes(user._id)){
+   if( user._id !=userD._id  && !liked.includes(user._id) && user.userProfileSet!=false){
     const swipe = (
      
        <div className={`${classN} flex flex-col absolute justify-center items-center user1`}>
@@ -195,6 +196,12 @@ setFilter(null)
                       user_block["img"] = user.userDetails.img
                       user_block["age"] = user.userDetails.age
                       user_block["techStack"] = user.userDetails.stack
+                      user_block["education"]= user.userDetails.education
+                      user_block["workExp"] = user.userDetails.workExp 
+                      user_block["links"] = user.userDetails.ImpLinks
+                      user_block["location"]= user.userDetails.location
+                      user_block["job"] = user.userDetails.job 
+                      user_block["title"] = user.userDetails.currentTitle
                       
                     if(user._id === user_d._id){
                       localStorage.setItem("user",JSON.stringify(user))

@@ -469,7 +469,7 @@ const Chat_Room = () =>{
                 <button className="outline-none flex flex-col ">
 
                 <h4>{reciever.name}</h4>
-                   <p className="text-gray-600 text-sm ">Tap to see profile</p>
+                  
                 </button>
                   
 
