@@ -97,8 +97,8 @@ const Matches = () =>{
                 <div>
                     <div className=" card-like ml-2 mb-2 mt-2 border border-gray-400 flex flex-col items-center justify-center" >
 
-                        <img className="blur p-4 rounded-full" src={item.userDetails.img[0]}></img>
-                        <h3 className="blur text-black">{item.name}</h3>
+                        <img className=" p-4 rounded-full" src={item.userDetails.img[0]}></img>
+                        <h3 className=" text-black">{item.name}</h3>
 
                     </div>
                     

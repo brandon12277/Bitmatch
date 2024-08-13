@@ -56,7 +56,7 @@ export async function POST(request){
                 
            
              user =  await Users.create(data);
-             return NextResponse.json({user},{status:201});
+             return;
             
         });
     });

@@ -504,8 +504,7 @@ const Chat_Room = () =>{
                         <div className="rounded shadow p-10 flex flex-col gap-5">
                         <input  ref={fileInputRef} style={{display:"none"}}  type="file" name="file" onChange={handleImageChange}  id="upload" accept="image/png, image/jpg, image/jpeg"></input>
                             <button onClick={handleButtonClick} className="w-full flex gap-2"><i style={{color:"#5b5b5b"}} class="fa-solid fa-image"></i> Photo</button>
-                            <button className="w-full flex gap-2"><i style={{color:"#5b5b5b"}} class="fa-solid fa-file"></i> Text file</button>
-                            <button className="w-full flex gap-2"><i class="fa-brands fa-codepen"></i> <span style={{color:"#aa4848"}}>CodeBlock</span></button>
+                           
                             
 
                          </div>
