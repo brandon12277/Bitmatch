@@ -21,7 +21,7 @@ export async function POST(request){
 
         console.log(" LIKES : ",likes)
 
-        const likedUser = await Promise.all(Object.values(likes).map((async like=>{
+        const likedUser = await Promise.all(likes.map((async like=>{
 
             const liked_use = {
              "_id" : like.liked_by
@@ -35,7 +35,7 @@ export async function POST(request){
         )))
        
        
-        const matched = await Promise.all(Object.values(likes).map((async like=>{
+        const matched = await Promise.all(likes.map((async like=>{
 
             let dat = {
                 "liked_by" : id,
@@ -59,7 +59,7 @@ export async function POST(request){
 
         
      
-         const matchedUser  = await Promise.all(Object.values(matched).map((async user_like=>{
+         const matchedUser  = await Promise.all(matched.map((async user_like=>{
            
             if(user_like){
             const liked_use = {
